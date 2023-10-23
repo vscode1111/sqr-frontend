@@ -95,21 +95,23 @@ export const theme = createTheme(baseTheme, {
           display: 'flex',
           gap: '12px',
           width: 200,
-          fontSize: 12,
+          height: 53,
+          fontSize: 16,
           fontWeight: 600,
-          backgroundColor: COLORS.gray0,
+          backgroundColor: COLORS.blue,
           color: COLORS.white,
           textTransform: 'initial',
           transition: TRANSITION,
           border: '1px solid transparent',
-          borderRadius: 8,
-          padding: '20px 12px',
+          borderRadius: 38,
+          padding: '0px 0px',
           '& > span': {
             marginTop: 3,
           },
           '&:hover': {
             backgroundColor: COLORS.gray1,
-            borderColor: COLORS.violet,
+            border: '1px solid transparent',
+            opacity: 0.5,
           },
           '&:disabled': {
             color: COLORS.white,
@@ -120,9 +122,6 @@ export const theme = createTheme(baseTheme, {
         text: {
           width: 'fit-content',
           borderBottom: `1px solid ${COLORS.black}`,
-          '&&': {
-            height: 28,
-          },
           '&:disabled': {
             borderBottom: `1px solid transparent`,
           },
@@ -133,9 +132,9 @@ export const theme = createTheme(baseTheme, {
           borderBottom: `1px solid ${COLORS.black}`,
           '&:hover': {
             opacity: 1,
-            color: COLORS.red,
+            color: COLORS.pink,
             border: 'unset',
-            borderBottom: `1px solid ${COLORS.red2}`,
+            borderBottom: `1px solid ${COLORS.pink}`,
             '& > svg': {
               color: COLORS.black,
             },
@@ -148,14 +147,14 @@ export const theme = createTheme(baseTheme, {
 
         sizeSmall: {
           fontSize: 13,
-          height: 32,
+          height: 50,
           width: 32,
           minWidth: 32,
         },
 
         sizeMedium: {
-          fontSize: 16,
-          height: 54,
+          fontSize: 20,
+          height: 56,
         },
 
         sizeLarge: {
@@ -181,10 +180,32 @@ export const theme = createTheme(baseTheme, {
       ],
     },
 
-    MuiInputBase: {
+    MuiInputLabel: {
       styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            color: COLORS.blue,
+          },
+        },
+      },
+    },
+
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            // borderRadius: 10,
+          },
+          '&.Mui-disabled': {
+            // opacity: 1,
+            backgroundColor: COLORS.gray2,
+          },
+        },
         input: {
-          padding: '4px 0 12px',
+          // padding: '20px',
+        },
+        notchedOutline: {
+          borderColor: `${COLORS.blue} !important`,
         },
       },
     },
@@ -205,6 +226,28 @@ export const theme = createTheme(baseTheme, {
           top: '50%',
           left: '0',
           transform: 'translate(0, -50%)',
+        },
+      },
+    },
+
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: {
+          color: COLORS.white,
+        },
+      },
+    },
+
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          height: 45,
+          backgroundColor: COLORS.gray1,
+          // border: `1px solid ${COLORS.blue}`,
+          // borderRadius: 10,
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: COLORS.blue,
+          },
         },
       },
     },

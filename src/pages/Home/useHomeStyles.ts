@@ -4,8 +4,7 @@ export const useHomeStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: 8,
-    marginTop: 50,
+    height: 'calc(100vh - 20px)',
   },
   mainContaniner: {
     display: 'flex',
@@ -26,7 +25,7 @@ export const useHomeStyles = makeStyles()((theme) => ({
     width: '100%',
   },
   sendButton: {
-    width: 150,
+    width: 180,
   },
   statusContainer: {
     display: 'flex',
@@ -34,19 +33,12 @@ export const useHomeStyles = makeStyles()((theme) => ({
     width: '100%',
     gap: 20,
   },
-  progress: {
-    flex: 3,
-  },
-  info: {
-    flex: 1,
-    minWidth: 150,
-  },
   stopContainer: {
     display: 'flex',
     width: '100%',
   },
   stopButton: {
     width: '100%',
-    backgroundColor: theme.colors.red,
+    backgroundColor: theme.colors.pink,
   },
 }));

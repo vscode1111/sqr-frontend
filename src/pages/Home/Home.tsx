@@ -1,22 +1,29 @@
+import { SecurityStatus } from './components';
 import { useHomeStyles } from './useHomeStyles';
+import { Loader } from '@/components';
 import { useStores } from '@/hooks';
-import { Button, LinearProgress, TextField, Typography } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { observer } from 'mobx-react';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export const Home = observer(() => {
   const { classes } = useHomeStyles();
   const { control } = useStores();
-  const { securityStatus } = control;
-  const { status, sharesCount, sharesThreshold } = securityStatus;
+  const { securityStatus, sendActionStatus, stopActionStatus } = control;
+  const { sharesCount, sharesThreshold } = securityStatus;
 
   const sendDisabled = useMemo(
     () => sharesCount >= sharesThreshold,
     [sharesCount, sharesThreshold],
   );
-  const stopDisabled = useMemo(() => sharesCount <= 0, [sharesCount]);
+  const stopDisabled = useMemo(() => sharesCount <= -1, [sharesCount]);
 
   const [share, setShare] = useState('');
+
+  const handleSend = useCallback(async () => {
+    await control.sendSecurityShare(share);
+    setShare('');
+  }, [share, control, setShare]);
 
   return (
     <div className={classes.root}>
@@ -30,27 +37,23 @@ export const Home = observer(() => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setShare(event.target.value);
             }}
-          />
-          <Button
-            className={classes.sendButton}
-            disabled={sendDisabled}
-            onClick={async () => {
-              await control.sendSecurityShare(share);
-              setShare('');
+            onKeyDown={async (e) => {
+              if (e.key === 'Enter') {
+                await handleSend();
+              }
             }}
-          >
+          />
+          <Button className={classes.sendButton} disabled={sendDisabled} onClick={handleSend}>
+            <Loader
+              size={20}
+              style={{ visibility: sendActionStatus === 'fetching' ? 'visible' : 'hidden' }}
+            />
             Send
+            <Loader size={20} style={{ visibility: 'hidden' }} />
           </Button>
         </div>
         <div className={classes.statusContainer}>
-          <LinearProgress
-            className={classes.progress}
-            variant='determinate'
-            value={Math.round((100 / sharesThreshold) * sharesCount)}
-          />
-          <Typography className={classes.info} variant='h4'>
-            {status}: {sharesCount}/{sharesThreshold}
-          </Typography>
+          <SecurityStatus />
         </div>
         <div className={classes.stopContainer}>
           <Button
@@ -58,7 +61,12 @@ export const Home = observer(() => {
             disabled={stopDisabled}
             onClick={() => control.stopSecurity()}
           >
+            <Loader
+              size={20}
+              style={{ visibility: stopActionStatus === 'fetching' ? 'visible' : 'hidden' }}
+            />
             Stop
+            <Loader size={20} style={{ visibility: 'hidden' }} />
           </Button>
         </div>
       </div>

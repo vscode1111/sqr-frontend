@@ -6,16 +6,16 @@ import { RootStore } from './RootStore';
 import { NormalizedError, StatusFetching } from './types';
 
 export class ControlStore extends BaseStore {
-  public securityStatus: SecurityStatusResponse;
+  securityStatus: SecurityStatusResponse;
 
-  public fetchStatus: StatusFetching;
-  public fetchError: NormalizedError;
+  fetchStatus: StatusFetching;
+  fetchError: NormalizedError;
 
-  public sendActionStatus: StatusFetching;
-  public sendActionError: NormalizedError;
+  sendActionStatus: StatusFetching;
+  sendActionError: NormalizedError;
 
-  public stopActionStatus: StatusFetching;
-  public stopActionError: NormalizedError;
+  stopActionStatus: StatusFetching;
+  stopActionError: NormalizedError;
 
   constructor(rootStore: RootStore) {
     super(rootStore);
@@ -40,6 +40,8 @@ export class ControlStore extends BaseStore {
       stopActionStatus: observable,
       stopActionError: observable,
       fetchSecurityStatus: action,
+      sendSecurityShare: action,
+      stopSecurity: action,
     });
 
     this.fetchSecurityStatus();
@@ -49,7 +51,7 @@ export class ControlStore extends BaseStore {
     }, 1000);
   }
 
-  public async fetchSecurityStatus() {
+  async fetchSecurityStatus() {
     await this.statusHandler(
       async () => {
         this.securityStatus = await controlService.fetchSecurityStatus();
@@ -59,9 +61,10 @@ export class ControlStore extends BaseStore {
     );
   }
 
-  public async sendSecurityShare(share: string) {
+  async sendSecurityShare(share: string) {
     await this.statusHandler(
       async () => {
+        // await sleep(1000);
         this.securityStatus = await controlService.sendSecurityShare(share);
       },
       'sendActionStatus',
@@ -69,7 +72,7 @@ export class ControlStore extends BaseStore {
     );
   }
 
-  public async stopSecurity() {
+  async stopSecurity() {
     await this.statusHandler(
       async () => {
         this.securityStatus = await controlService.stopSecurity();

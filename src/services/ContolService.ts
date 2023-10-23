@@ -1,6 +1,10 @@
 import { SecurityStatusResponse } from '@/types';
 import axios from 'axios';
 
+// axios.defaults.baseURL = 'http://myurl';
+// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
 const baseUrl = 'http://localhost:3000';
 
 export class ControlService {
@@ -10,12 +14,12 @@ export class ControlService {
   }
 
   async sendSecurityShare(share: string): Promise<SecurityStatusResponse> {
-    const response = await axios.post(`${baseUrl}/security/set-share`, { share });
+    const response = await axios.post(`${baseUrl}/security/send-share`, { share });
     return response.data;
   }
 
   async stopSecurity(): Promise<SecurityStatusResponse> {
-    const response = await axios.delete(`${baseUrl}/security/stop`);
+    const response = await axios.delete(`${baseUrl}/security/stop`, { withCredentials: false });
     return response.data;
   }
 }
