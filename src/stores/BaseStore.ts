@@ -1,6 +1,6 @@
-import { RootStore } from '@/stores';
-import { sleep } from '@/utils';
 import { action, makeObservable, runInAction } from 'mobx';
+import { RootStore } from '~stores';
+import { sleep } from '~utils';
 
 export const baseStoreProps: Partial<Record<keyof BaseStore, unknown>> = {
   statusHandler: action,

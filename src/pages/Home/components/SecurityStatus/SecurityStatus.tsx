@@ -1,11 +1,11 @@
 import { useSecurityStatus } from './useSecurityStatus';
-import { Loader } from '@/components';
-import { COLORS } from '@/consts';
-import { useStores } from '@/hooks';
-import { SecurityStatusType } from '@/types';
 import { LinearProgress, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useMemo } from 'react';
+import { Loader } from '~components';
+import { COLORS } from '~consts';
+import { useStores } from '~hooks';
+import { SecurityStatusType } from '~types';
 
 const dictionary: Record<SecurityStatusType, { name: string; color: string }> = {
   waiting: {

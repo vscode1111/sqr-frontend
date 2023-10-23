@@ -1,10 +1,10 @@
 import { SecurityStatus } from './components';
 import { useHomeStyles } from './useHomeStyles';
-import { Loader } from '@/components';
-import { useStores } from '@/hooks';
 import { Button, TextField } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useCallback, useMemo, useState } from 'react';
+import { Loader } from '~components';
+import { useStores } from '~hooks';
 
 export const Home = observer(() => {
   const { classes } = useHomeStyles();

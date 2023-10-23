@@ -1,5 +1,5 @@
-import { Colors } from '@/consts';
-import { stores } from '@/stores';
+import { Colors } from '~consts';
+import { stores } from '~stores';
 
 declare module '@mui/material/styles' {
   interface Theme {
