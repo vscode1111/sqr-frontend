@@ -1,7 +1,7 @@
-import { RootStore } from "./RootStore";
+import { RootStore } from './RootStore';
 
 export const stores = new RootStore();
 
-if (!process.env.production) {
+if (!process.env.prod) {
   window.stores = stores;
 }
