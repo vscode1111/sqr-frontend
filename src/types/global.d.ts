@@ -1,4 +1,4 @@
-import { Colors } from '~consts';
+import { Colors } from '~constants';
 import { stores } from '~stores';
 
 declare module '@mui/material/styles' {

@@ -1,4 +1,4 @@
-import { COLORS } from "../consts/styles";
+import { COLORS } from '../constants/styles';
 
 export const globalStyles = `   
   html {

@@ -2,17 +2,13 @@
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import envConfig from './config';
+import { EnvironmentConfig } from './src/types';
 
-const config = require('./config');
+const config: EnvironmentConfig = envConfig;
+
 console.log(111, config, process.env.NODE_ENV);
 const isProduction = process.env.NODE_ENV === 'prod';
-
-const evnDict = {
-  dev: 'development',
-  development: 'development',
-  prod: 'production',
-  production: 'production',
-};
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,6 +27,8 @@ export default defineConfig({
     // 'process.env.NODE_ENV': JSON.stringify('production'),
     'process.env.production': isProduction,
     'process.env.host': JSON.stringify(config.host),
+    'process.env.oktaClientId': JSON.stringify(config.oktaClientId),
+    'process.env.oktaDomain': JSON.stringify(config.oktaDomain),
   },
   build: {
     chunkSizeWarningLimit: 1000,

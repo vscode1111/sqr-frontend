@@ -3,7 +3,7 @@ import { LinearProgress, Typography } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useMemo } from 'react';
 import { Loader } from '~components';
-import { COLORS } from '~consts';
+import { COLORS } from '~constants';
 import { useStores } from '~hooks';
 import { SecurityStatusType } from '~types';
 
@@ -34,7 +34,7 @@ export const SecurityStatus = observer(() => {
       status === 'waiting'
         ? `${dictRecord.name} (${sharesCount}/${sharesThreshold})`
         : dictRecord.name,
-    [dictRecord, sharesCount, sharesThreshold],
+    [status, dictRecord, sharesCount, sharesThreshold],
   );
 
   return (

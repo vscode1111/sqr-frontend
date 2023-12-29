@@ -6,7 +6,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Loader } from '~components';
 import { useStores } from '~hooks';
 
-export const Home = observer(() => {
+export const Control = observer(() => {
   const { classes } = useHomeStyles();
   const { control } = useStores();
   const { securityStatus, sendActionStatus, stopActionStatus } = control;
