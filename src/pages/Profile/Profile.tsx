@@ -2,16 +2,9 @@ import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
 import { useState, useEffect } from 'react';
 
-interface ApiData {
-  id: string;
-  date: string;
-  text: string;
-}
-
 export function Profile() {
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState<UserClaims<CustomUserClaims> | null>(null);
-  const [messages, setMessages] = useState<ApiData[]>([]);
 
   useEffect(() => {
     if (!authState || !authState.isAuthenticated) {
@@ -25,7 +18,7 @@ export function Profile() {
   }, [authState, oktaAuth]); // Update if authState changes
 
   const callBackend = async () => {
-    const response = await fetch('http://localhost:8080/api/locked', {
+    const response = await fetch('http://localhost:3000/version', {
       headers: {
         Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
       },
@@ -35,7 +28,8 @@ export function Profile() {
       return Promise.reject();
     }
     const data = await response.json();
-    setMessages(data.messages);
+    console.log(111, data);
+    // setMessages(data.messages);
   };
 
   if (!userInfo) {
@@ -82,22 +76,6 @@ export function Profile() {
           </tbody>
         </table>
         <button onClick={callBackend}>Call api</button>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {messages?.map((message, index) => (
-              <tr key={index} id={message.id}>
-                <td>{message.date}</td>
-                <td>{message.text}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

@@ -17,6 +17,8 @@ export class ControlStore extends BaseStore {
   stopActionStatus: StatusFetching;
   stopActionError: NormalizedError;
 
+  private fetchingStatus: boolean;
+
   constructor(rootStore: RootStore) {
     super(rootStore);
 
@@ -29,6 +31,8 @@ export class ControlStore extends BaseStore {
     this.fetchStatus = 'init';
     this.sendActionStatus = 'init';
     this.stopActionStatus = 'init';
+
+    this.fetchingStatus = false;
 
     makeObservable(this, {
       // ...baseStoreProps,
@@ -44,11 +48,21 @@ export class ControlStore extends BaseStore {
       stopSecurity: action,
     });
 
-    this.fetchSecurityStatus();
-
     setInterval(() => {
+      if (!this.fetchingStatus) {
+        return;
+      }
+
       this.fetchSecurityStatus();
     }, 1000);
+  }
+
+  startFetchingStatus() {
+    this.fetchingStatus = true;
+  }
+
+  stopFetchingStatus() {
+    this.fetchingStatus = false;
   }
 
   async fetchSecurityStatus() {

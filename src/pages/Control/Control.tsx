@@ -1,16 +1,25 @@
 import { SecurityStatus } from './components';
-import { useHomeStyles } from './useHomeStyles';
+import { useControlStyles } from './useHomeStyles';
 import { Button, TextField } from '@mui/material';
 import { observer } from 'mobx-react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Loader } from '~components';
 import { useStores } from '~hooks';
 
 export const Control = observer(() => {
-  const { classes } = useHomeStyles();
+  const { classes } = useControlStyles();
   const { control } = useStores();
   const { securityStatus, sendActionStatus, stopActionStatus } = control;
   const { sharesCount, sharesThreshold } = securityStatus;
+
+  useEffect(() => {
+    control.startFetchingStatus();
+
+    return () => {
+      control.stopFetchingStatus();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sendDisabled = useMemo(
     () => sharesCount >= sharesThreshold,

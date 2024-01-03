@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useControlStyles = makeStyles()((theme) => ({
+export const useHomeStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
