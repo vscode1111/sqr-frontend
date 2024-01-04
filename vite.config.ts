@@ -1,14 +1,27 @@
 // import replace from '@rollup/plugin-replace';
 import react from '@vitejs/plugin-react-swc';
-import { defineConfig } from 'vite';
+import { UserConfig, defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import envConfig from './config';
 import { EnvironmentConfig } from './src/types';
 
 const config: EnvironmentConfig = envConfig;
 
+console.log(111, config);
+
 const isProduction = process.env.NODE_ENV === 'prod';
-console.log(111, config, process.env.NODE_ENV, isProduction);
+
+const extConfig: UserConfig = isProduction
+  ? {
+      server: {
+        host: '0.0.0.0',
+        port: 80,
+        watch: {
+          ignored: ['**/**'],
+        },
+      },
+    }
+  : {};
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -43,4 +56,5 @@ export default defineConfig({
     //   },
     // },
   },
-});
+  ...extConfig,
+} as UserConfig);

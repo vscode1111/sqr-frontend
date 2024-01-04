@@ -13,4 +13,4 @@ export const oktaConfig: OktaAuthOptions = {
   pkce: true,
 };
 
-console.log(111, oktaConfig);
+console.log(111, 'oktaConfig', oktaConfig);
