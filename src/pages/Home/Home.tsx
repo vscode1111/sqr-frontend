@@ -25,7 +25,7 @@ export const Home = observer(() => {
       <div className={classes.root}>
         <div className={classes.mainContaniner}>
           <div className={classes.stopContainer}>
-            <Button className={classes.stopButton} onClick={login}>
+            <Button className={classes.stopButton} variant='contained' onClick={login}>
               Okta Login
             </Button>
           </div>

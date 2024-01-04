@@ -121,9 +121,16 @@ export const theme = createTheme(baseTheme, {
 
         text: {
           width: 'fit-content',
-          borderBottom: `1px solid ${COLORS.black}`,
+          backgroundColor: 'transparent',
+          border: '1px solid transparent',
+          borderRadius: 0,
           '&:disabled': {
             borderBottom: `1px solid transparent`,
+          },
+          '&:hover': {
+            backgroundColor: 'transparent',
+            border: '1px solid transparent',
+            opacity: 0.5,
           },
         },
 

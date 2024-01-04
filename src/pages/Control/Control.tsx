@@ -1,6 +1,7 @@
 import { SecurityStatus } from './components';
 import { useControlStyles } from './useHomeStyles';
 import { Button, TextField } from '@mui/material';
+import { useOktaAuth } from '@okta/okta-react';
 import { observer } from 'mobx-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Loader, PageLayout } from '~components';
@@ -11,6 +12,8 @@ export const Control = observer(() => {
   const { control } = useStores();
   const { securityStatus, sendActionStatus, stopActionStatus } = control;
   const { sharesCount, sharesThreshold } = securityStatus;
+
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
     control.startFetchingStatus();
@@ -28,6 +31,8 @@ export const Control = observer(() => {
   const stopDisabled = useMemo(() => sharesCount <= -1, [sharesCount]);
 
   const [share, setShare] = useState('');
+
+  console.log(333, authState?.accessToken?.accessToken);
 
   const handleSend = useCallback(async () => {
     await control.sendSecurityShare(share);
@@ -53,7 +58,12 @@ export const Control = observer(() => {
                 }
               }}
             />
-            <Button className={classes.sendButton} disabled={sendDisabled} onClick={handleSend}>
+            <Button
+              variant='contained'
+              className={classes.sendButton}
+              disabled={sendDisabled}
+              onClick={handleSend}
+            >
               <Loader
                 size={20}
                 style={{ visibility: sendActionStatus === 'fetching' ? 'visible' : 'hidden' }}
@@ -68,6 +78,7 @@ export const Control = observer(() => {
           <div className={classes.stopContainer}>
             <Button
               className={classes.stopButton}
+              variant='contained'
               disabled={stopDisabled}
               onClick={() => control.stopSecurity()}
             >

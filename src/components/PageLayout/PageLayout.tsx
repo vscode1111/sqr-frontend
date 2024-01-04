@@ -1,6 +1,6 @@
 import { usePageLayoutStyles } from './usePageLayoutStyles';
 import { AccountCircle } from '@mui/icons-material';
-import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import { ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -57,16 +57,13 @@ export function PageLayout({ children }: PageLayoutProps) {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} position='static'>
-        <Toolbar>
-          <Typography
-            variant='h6'
-            noWrap
-            component='div'
-            color={'white'}
-            onClick={() => navigate(`/${ROUTE.CONTROL}`)}
-          >
+        <Toolbar className={classes.toolbar}>
+          <Button variant='text' onClick={() => navigate(`/${ROUTE.CONTROL}`)}>
             Control
-          </Typography>
+          </Button>
+          <Button variant='text' onClick={() => navigate(`/${ROUTE.SHAMIRS}`)}>
+            Shamirs
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             size='large'

@@ -1,7 +1,7 @@
 {
   "name": "sqr-claim-frontend",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "commit": "git-cz",
     "dev": "cross-env NODE_ENV=local vite",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --config ./.prettierrc --write \"src/**/*.ts*\"",
-    "http-server": "http-server dist -p 3090"
+    "http-server": "http-server dist -p 5173 --proxy http://localhost:5173?"
   },
   "files": [
     "src",

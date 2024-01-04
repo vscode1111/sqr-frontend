@@ -5,6 +5,7 @@ export const useControlStyles = makeStyles()((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    height: '100%',
   },
   mainContaniner: {
     display: 'flex',

@@ -83,7 +83,7 @@ export function Shamirs() {
       <div className={classes.buttonContainer}>
         <Button
           className={classes.button}
-          variant='text'
+          variant='contained'
           type='submit'
           disabled={isDisabled}
           onClick={handleSubmit(async (formValues) => {
