@@ -10,7 +10,7 @@ COPY ./vite.config.ts .
 COPY ./index.html .
 ENV NODE_ENV=prod
 RUN npm i
-RUN npm run build
+RUN npm run build:prod
 
 # production environment
 FROM nginx:stable-alpine
