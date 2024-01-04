@@ -19,12 +19,12 @@ RUN npm version ${VERSION} --no-git-tag-version
 # WORKDIR /app
 
 # Upgrade packages
-RUN apk upgrade --no-cache && \
-    rm -rf /var/cache/apk/*
+# RUN apk upgrade --no-cache && \
+#     rm -rf /var/cache/apk/*
 
 # Setup user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nodejs
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nodejs
 
 # Gather files
 # RUN mkdir config && chown nodejs:nodejs ./config
@@ -32,7 +32,7 @@ RUN adduser --system --uid 1001 nodejs
 # COPY --chown=nodejs:nodejs --from=build /app/package.json /app/package-lock.json /app/tsconfig.json /app/vite.config.ts /app/index.html ./
 # COPY --chown=nodejs:nodejs /config/index.js ./config/
 
-USER nodejs
+# USER nodejs
 EXPOSE 80
 
 #CMD npm run dev:prod
