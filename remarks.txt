@@ -1,2 +1,2 @@
-docker build -t sqr-claim-frontend .
-docker run -d --name sqr-claim-frontend-01 -p 80:80 sqr-claim-frontend
+docker build -t sqr-frontend .
+docker run -d --name sqr-frontend-01 -p 80:80 sqr-frontend
