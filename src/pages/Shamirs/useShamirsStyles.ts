@@ -1,10 +1,10 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useControlStyles = makeStyles()((theme) => ({
+export const useShamirsStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    width: '100%',
+    // height: 'calc(100vh - 20px)',
   },
   mainContaniner: {
     display: 'flex',
@@ -17,28 +17,40 @@ export const useControlStyles = makeStyles()((theme) => ({
   },
   inputContainer: {
     display: 'flex',
-    alignItems: 'center',
-    gap: 20,
-    width: '100%',
+    flexDirection: 'column',
+    gap: 21,
+    marginBottom: 23,
   },
-  shareInput: {
-    width: '100%',
-  },
-  sendButton: {
-    width: 180,
-  },
-  statusContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    gap: 20,
-  },
-  stopContainer: {
+  inputRow1: {
     display: 'flex',
     width: '100%',
   },
-  stopButton: {
+  inputRow2: {
+    display: 'flex',
+    gap: 20,
+  },
+  input: {
+    width: '100%',
+  },
+  buttonContainer: {
+    display: 'flex',
+    width: '100%',
+  },
+  button: {
     width: '100%',
     backgroundColor: theme.colors.pink,
+  },
+  shareContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    overflowX: 'auto',
+    gap: 10,
+    marginTop: 30,
+  },
+  share: {
+    display: 'flex',
+    gap: 10,
+    alignItems: 'center',
   },
 }));

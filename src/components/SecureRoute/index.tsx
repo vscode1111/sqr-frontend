@@ -19,7 +19,6 @@ export const RequiredAuth = observer(() => {
     }
 
     if (authState?.accessToken?.accessToken) {
-      console.log(100, authState.accessToken.accessToken);
       auth.setToken(authState.accessToken.accessToken);
     }
   }, [auth, oktaAuth, authState?.isAuthenticated, authState?.accessToken?.accessToken]);

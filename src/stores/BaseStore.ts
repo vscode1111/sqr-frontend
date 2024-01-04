@@ -25,6 +25,10 @@ export abstract class BaseStore {
     const statusFieldStr = String(statusField);
     const errorFieldStr = String(errorField);
 
+    // if ((this as any)[statusFieldStr] === 'fetching') {
+    //   return Promise.resolve();
+    // }
+
     if (statusField) {
       (this as any)[statusFieldStr] = 'fetching';
     }

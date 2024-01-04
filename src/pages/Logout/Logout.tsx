@@ -1,12 +1,17 @@
+import { Button } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
+import { PageLayout } from '~components';
 
 export function Logout() {
   const { oktaAuth } = useOktaAuth();
 
   const logout = async () => {
-    // Will redirect to Okta to end the session then redirect back to the configured `postLogoutRedirectUri`
     await oktaAuth.signOut();
   };
 
-  return <button onClick={logout}>Logout</button>;
+  return (
+    <PageLayout>
+      <Button onClick={logout}>Logout</Button>
+    </PageLayout>
+  );
 }

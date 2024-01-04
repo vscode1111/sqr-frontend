@@ -7,6 +7,7 @@ export const globalStyles = `
     min-height: 100vh;
     min-height: -webkit-fill-available;
     scroll-behavior: smooth;
+    margin: 0;
   }
   
   body {
@@ -19,7 +20,7 @@ export const globalStyles = `
     font-size: 16px;
     flex-direction: column;
     flex: 1;
-    margin: 0;
+    margin: 0px;
     padding: 0;
     position: relative;
     scroll-behavior: smooth;

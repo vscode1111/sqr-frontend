@@ -220,15 +220,15 @@ export const theme = createTheme(baseTheme, {
       },
     },
 
-    MuiModal: {
-      styleOverrides: {
-        root: {
-          top: '50%',
-          left: '0',
-          transform: 'translate(0, -50%)',
-        },
-      },
-    },
+    // MuiModal: {
+    //   styleOverrides: {
+    //     root: {
+    //       top: '50%',
+    //       left: '0',
+    //       transform: 'translate(0, -50%)',
+    //     },
+    //   },
+    // },
 
     MuiCircularProgress: {
       styleOverrides: {

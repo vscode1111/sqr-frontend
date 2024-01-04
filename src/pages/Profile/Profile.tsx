@@ -1,8 +1,12 @@
+import { useProfileStyles } from './useProfileStyles';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { PageLayout } from '~components';
 
 export function Profile() {
+  const { classes } = useProfileStyles();
+
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState<UserClaims<CustomUserClaims> | null>(null);
 
@@ -32,17 +36,17 @@ export function Profile() {
     // setMessages(data.messages);
   };
 
-  if (!userInfo) {
-    return (
-      <div>
-        <p>Fetching user profile...</p>
-      </div>
-    );
-  }
+  const content = useMemo(() => {
+    if (!userInfo) {
+      return (
+        <div>
+          <p>Fetching user profile...</p>
+        </div>
+      );
+    }
 
-  return (
-    <div>
-      <div>
+    return (
+      <div className={classes.root}>
         <p>
           Below is the information from your ID token which was obtained during the &nbsp;
           <a href='https://developer.okta.com/docs/guides/implement-auth-code-pkce'>
@@ -77,6 +81,8 @@ export function Profile() {
         </table>
         <button onClick={callBackend}>Call api</button>
       </div>
-    </div>
-  );
+    );
+  }, [userInfo, classes.root, callBackend]);
+
+  return <PageLayout>{content}</PageLayout>;
 }

@@ -4,6 +4,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { ROUTE } from '~constants';
 
 export const Home = observer(() => {
   const { classes } = useHomeStyles();
@@ -11,14 +12,10 @@ export const Home = observer(() => {
   const { authState, oktaAuth } = useOktaAuth();
   const navigate = useNavigate();
 
-  const login = () => oktaAuth.signInWithRedirect({ originalUri: '/profile' });
-
-  console.log(199, authState);
+  const login = () => oktaAuth.signInWithRedirect({ originalUri: `/${ROUTE.CONTROL}` });
 
   useEffect(() => {
-    if (authState?.isAuthenticated) {
-      navigate('/control');
-    }
+    navigate(authState?.isAuthenticated ? `/${ROUTE.CONTROL}` : '/');
   }, [authState?.isAuthenticated, navigate]);
 
   if (!authState) {
