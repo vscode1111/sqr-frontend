@@ -8,13 +8,14 @@ import { EnvironmentConfig } from './src/types';
 const config: EnvironmentConfig = envConfig;
 
 console.log(111, config);
+console.log("NODE_ENV", process.env.NODE_ENV);
 
 const isProduction = process.env.NODE_ENV === 'prod';
 
 const extConfig: UserConfig = isProduction
   ? {
       server: {
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: 80,
         watch: {
           ignored: ['**/**'],
