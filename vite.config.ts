@@ -28,7 +28,8 @@ export default defineConfig({
     'process.env.production': isProduction,
     'process.env.host': JSON.stringify(config.host),
     'process.env.oktaClientId': JSON.stringify(config.oktaClientId),
-    'process.env.oktaDomain': JSON.stringify(config.oktaDomain),
+    'process.env.oktaIssuer': JSON.stringify(config.oktaIssuer),
+    'process.env.oktaRedirectUri': JSON.stringify(config.oktaRedirectUri),
   },
   build: {
     chunkSizeWarningLimit: 1000,

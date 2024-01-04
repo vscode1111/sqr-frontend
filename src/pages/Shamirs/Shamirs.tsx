@@ -24,7 +24,7 @@ export function Shamirs() {
   } = useForm<RequestEntity>({
     mode: 'onChange',
     defaultValues: {
-      secret: 'test secret',
+      secret: 'secret text',
       shares: 5,
       threshold: 3,
     },
