@@ -7,8 +7,8 @@ import { EnvironmentConfig } from './src/types';
 
 const config: EnvironmentConfig = envConfig;
 
-console.log(111, config, process.env.NODE_ENV);
 const isProduction = process.env.NODE_ENV === 'prod';
+console.log(111, config, process.env.NODE_ENV, isProduction);
 
 // https://vitejs.dev/config/
 export default defineConfig({
