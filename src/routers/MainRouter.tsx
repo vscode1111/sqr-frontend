@@ -1,7 +1,7 @@
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
-import { LoginCallback, Security } from '@okta/okta-react';
+import { Security } from '@okta/okta-react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Loading, RequiredAuth } from '~components';
+import { LoginCallbackEx, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
 import { Control, Home, Logout, Profile, Shamirs } from '~pages';
@@ -25,7 +25,7 @@ export function MainRouter() {
           </Route>
         </Route>
         <Route path={`/${ROUTE.PROFILE}`} element={<Profile />} />
-        <Route path={CALLBACK_PATH} element={<LoginCallback loadingElement={<Loading />} />} />
+        <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.SHAMIRS}`} element={<Shamirs />} />
         <Route path={`/${ROUTE.LOGOUT}`} element={<Logout />} />
       </Routes>

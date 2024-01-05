@@ -4,5 +4,4 @@ module.exports = {
   // oktaDomain: 'dev-20953497.okta.com',
   oktaClientId: '0oaabylo187NECgl1697',
   oktaIssuer: 'https://okta.msq.ai',
-  oktaRedirectUri: 'http://localhost:5173/login/callback',
 };

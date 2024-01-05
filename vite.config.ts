@@ -8,7 +8,7 @@ import { EnvironmentConfig } from './src/types';
 const config: EnvironmentConfig = envConfig;
 
 console.log(111, config);
-console.log("NODE_ENV", process.env.NODE_ENV);
+console.log('NODE_ENV', process.env.NODE_ENV);
 
 const isProduction = process.env.NODE_ENV === 'prod';
 
@@ -43,7 +43,6 @@ export default defineConfig({
     'process.env.host': JSON.stringify(config.host),
     'process.env.oktaClientId': JSON.stringify(config.oktaClientId),
     'process.env.oktaIssuer': JSON.stringify(config.oktaIssuer),
-    'process.env.oktaRedirectUri': JSON.stringify(config.oktaRedirectUri),
   },
   build: {
     chunkSizeWarningLimit: 1000,
