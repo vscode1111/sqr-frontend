@@ -1,25 +1,11 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useShamirsStyles = makeStyles()((theme) => ({
+export const useSharesStyles = makeStyles()((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    // height: 'calc(100vh - 20px)',
-  },
-  mainContaniner: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 30,
-    justifyContent: 'center',
-    width: '100%',
-    maxWidth: 800,
-  },
-  inputContainer: {
     display: 'flex',
     flexDirection: 'column',
     gap: 21,
-    marginBottom: 23,
+    marginTop: 50,
   },
   inputRow1: {
     display: 'flex',

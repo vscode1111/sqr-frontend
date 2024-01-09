@@ -1,10 +1,11 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useHomeStyles = makeStyles()((theme) => ({
+export const useMonitoringStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    height: 'calc(100vh - 100px)',
+    width: '100%',
+    height: '100%',
   },
   mainContaniner: {
     display: 'flex',
@@ -13,14 +14,5 @@ export const useHomeStyles = makeStyles()((theme) => ({
     gap: 30,
     justifyContent: 'center',
     width: '100%',
-    maxWidth: 800,
-  },
-  stopContainer: {
-    display: 'flex',
-    width: '100%',
-  },
-  stopButton: {
-    width: '100%',
-    backgroundColor: theme.colors.pink,
   },
 }));

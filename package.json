@@ -1,7 +1,7 @@
 {
   "name": "sqr-claim-frontend",
   "private": true,
-  "version": "0.0.14",
+  "version": "0.0.15",
   "scripts": {
     "commit": "git-cz",
     "dev": "cross-env NODE_ENV=local vite",
@@ -41,6 +41,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-router-dom": "^6.17.0",
+    "react-uid": "^2.3.3",
     "shamirs-secret-sharing": "^2.0.0",
     "tss-react": "^4.9.3",
     "vite-tsconfig-paths": "^4.2.1"

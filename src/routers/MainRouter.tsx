@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { LoginCallbackEx, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
-import { Control, Home, Logout, Profile, Shamirs } from '~pages';
+import { Claim, Home, Logout, Profile, Shamirs } from '~pages';
 
 const CALLBACK_PATH = '/login/callback';
 
@@ -20,13 +20,13 @@ export function MainRouter() {
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
       <Routes>
         <Route path='/' element={<Home />}>
-          <Route path={`/${ROUTE.CONTROL}`} element={<RequiredAuth />}>
-            <Route path='' element={<Control />} />
+          <Route path={`/${ROUTE.CLAIM}`} element={<RequiredAuth />}>
+            <Route path='' element={<Claim />} />
           </Route>
         </Route>
         <Route path={`/${ROUTE.PROFILE}`} element={<Profile />} />
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
-        <Route path={`/${ROUTE.SHAMIRS}`} element={<Shamirs />} />
+        <Route path={`/${ROUTE.SHARES}`} element={<Shamirs />} />
         <Route path={`/${ROUTE.LOGOUT}`} element={<Logout />} />
       </Routes>
     </Security>

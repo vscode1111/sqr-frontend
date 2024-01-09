@@ -12,5 +12,3 @@ export const oktaConfig: OktaAuthOptions = {
   scopes: ['openid', 'profile', 'email'],
   pkce: true,
 };
-
-console.log(111, 'oktaConfig', oktaConfig);

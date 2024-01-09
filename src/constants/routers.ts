@@ -1,7 +1,7 @@
 export enum ROUTE {
   LOGOUT = 'logout',
-  CONTROL = 'control',
+  CLAIM = 'claim',
   PROFILE = 'profile',
-  SHAMIRS = 'shamirs',
+  SHARES = 'shares',
   VALIDATORS = 'validators',
 }

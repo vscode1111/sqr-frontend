@@ -79,6 +79,20 @@ export class ControlStore extends BaseStore {
     );
   }
 
+  async fetchStats() {
+    if (this.fetchStatus === 'fetching') {
+      return;
+    }
+
+    await this.statusHandler(
+      async () => {
+        this.securityStatus = await controlService.fetchSecurityStatus();
+      },
+      'fetchStatus',
+      'fetchError',
+    );
+  }
+
   async sendSecurityShare(share: string) {
     await this.statusHandler(
       async () => {

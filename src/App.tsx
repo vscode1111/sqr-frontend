@@ -1,6 +1,6 @@
 import { MainRouter } from './routers';
 import { theme } from './themes';
-import { ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { configure } from 'mobx';
 
 configure({
@@ -10,6 +10,7 @@ configure({
 export function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <MainRouter />
     </ThemeProvider>
   );

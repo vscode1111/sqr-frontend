@@ -14,7 +14,6 @@ export const useControlStyles = makeStyles()((theme) => ({
     gap: 30,
     justifyContent: 'center',
     width: '100%',
-    maxWidth: 800,
   },
   inputContainer: {
     display: 'flex',

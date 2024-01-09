@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SecurityStatusResponse } from '~types';
+import { SecurityStatusResponse, ServiceStats } from '~types';
 import { getBaseUrl, getCommonConfig } from './common';
 
 export class ControlService {
@@ -24,6 +24,11 @@ export class ControlService {
       ...getCommonConfig(),
       withCredentials: false,
     });
+    return response.data;
+  }
+
+  async fetchStats(): Promise<ServiceStats> {
+    const response = await axios.get(`${getBaseUrl()}/indexer/bsc/stats`, getCommonConfig());
     return response.data;
   }
 }

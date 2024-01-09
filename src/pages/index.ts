@@ -1,5 +1,5 @@
-export * from './Control';
+export * from './Claim';
 export * from './Home';
 export * from './Logout';
 export * from './Profile';
-export * from './Shamirs';
+export * from './Shares';

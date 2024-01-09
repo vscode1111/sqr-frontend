@@ -7,20 +7,19 @@ export const globalStyles = `
     min-height: 100vh;
     min-height: -webkit-fill-available;
     scroll-behavior: smooth;
-    margin: 0;
   }
   
   body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background: ${COLORS.black};
+    // background: ${COLORS.black};
     box-sizing: border-box;
     color: ${COLORS.black};
     font-family: 'Galano Grotesque';
     font-size: 16px;
     flex-direction: column;
     flex: 1;
-    margin: 0px;
+
     padding: 0;
     position: relative;
     scroll-behavior: smooth;
@@ -31,7 +30,6 @@ export const globalStyles = `
     font-family: 'Galano Grotesque';
     font-size: 100%;
     line-height: 110%;
-    margin: 0;
   }
         
   ::-moz-focus-inner {
@@ -45,7 +43,7 @@ export const globalStyles = `
 
   ::-webkit-scrollbar {
     width: 7px;
-    height: 0px;
+    height: 7px;
   }
   
   ::-webkit-scrollbar-track {

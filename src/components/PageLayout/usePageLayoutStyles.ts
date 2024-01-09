@@ -4,9 +4,10 @@ export const usePageLayoutStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   appBar: {
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   toolbar: {
     display: 'flex',
@@ -15,7 +16,10 @@ export const usePageLayoutStyles = makeStyles()(() => ({
   children: {
     display: 'flex',
     flexDirection: 'column',
+    paddingLeft: 50,
+    paddingRight: 50,
     width: '100%',
-    height: 'calc(100vh - 20px)',
+    maxWidth: 800,
+    height: 'calc(100vh - 100px)',
   },
 }));

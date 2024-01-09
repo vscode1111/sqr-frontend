@@ -1,10 +1,23 @@
 import { usePageLayoutStyles } from './usePageLayoutStyles';
 import { AccountCircle } from '@mui/icons-material';
-import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
+import { AppBar, Box, IconButton, Menu, MenuItem, Tab, Tabs, Toolbar } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import { ReactNode, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { uid } from 'react-uid';
 import { ROUTE } from '~constants';
+import { TabValue } from '~types';
+
+const tabValueList: TabValue[] = [
+  {
+    label: 'Claim',
+    value: ROUTE.CLAIM,
+  },
+  {
+    label: 'Shares',
+    value: ROUTE.SHARES,
+  },
+];
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -15,10 +28,17 @@ export function PageLayout({ children }: PageLayoutProps) {
 
   const { oktaAuth } = useOktaAuth();
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
+  const [tab, setTab] = useState(location.pathname.replace('/', ''));
+
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
+    setTab(newValue);
+    navigate(`/${newValue}`);
+  };
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -58,12 +78,11 @@ export function PageLayout({ children }: PageLayoutProps) {
     <div className={classes.root}>
       <AppBar className={classes.appBar} position='static'>
         <Toolbar className={classes.toolbar}>
-          <Button variant='text' onClick={() => navigate(`/${ROUTE.CONTROL}`)}>
-            Control
-          </Button>
-          <Button variant='text' onClick={() => navigate(`/${ROUTE.SHAMIRS}`)}>
-            Shamirs
-          </Button>
+          <Tabs value={tab} onChange={handleTabChange}>
+            {tabValueList.map(({ value: route, label }) => (
+              <Tab key={uid(route)} label={label} value={route} />
+            ))}
+          </Tabs>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
             size='large'

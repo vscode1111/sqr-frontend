@@ -1,6 +1,6 @@
 import { requestResolver } from './form-utils';
 import { RequestEntity } from './types';
-import { useShamirsStyles } from './useShamirsStyles';
+import { useSharesStyles } from './useSharesStyles';
 import { getShares } from './utils';
 import { Button } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
@@ -9,7 +9,7 @@ import { P } from '~common';
 import { CopyText, Loader, PageLayout, TextField } from '~components';
 
 export function Shamirs() {
-  const { classes } = useShamirsStyles();
+  const { classes } = useSharesStyles();
 
   const [isSending, setSending] = useState(false);
   const [resultShares, setResultShares] = useState<string[]>([]);
@@ -45,7 +45,7 @@ export function Shamirs() {
 
   return (
     <PageLayout>
-      <div className={classes.inputContainer}>
+      <div className={classes.root}>
         <div className={classes.inputRow1}>
           <TextField
             className={classes.input}

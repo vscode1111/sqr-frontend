@@ -12,10 +12,10 @@ export const Home = observer(() => {
   const { authState, oktaAuth } = useOktaAuth();
   const navigate = useNavigate();
 
-  const login = () => oktaAuth.signInWithRedirect({ originalUri: `/${ROUTE.CONTROL}` });
+  const login = () => oktaAuth.signInWithRedirect({ originalUri: `/${ROUTE.CLAIM}` });
 
   useEffect(() => {
-    navigate(authState?.isAuthenticated ? `/${ROUTE.CONTROL}` : '/');
+    navigate(authState?.isAuthenticated ? `/${ROUTE.CLAIM}` : '/');
   }, [authState?.isAuthenticated, navigate]);
 
   if (!authState) {
