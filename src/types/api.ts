@@ -1,5 +1,10 @@
 export type SecurityStatusType = 'waiting' | 'running' | 'error';
 
+export interface VersionResponse {
+  name: string;
+  version: string;
+}
+
 export interface SecurityStatusResponse {
   status: SecurityStatusType;
   sharesCount: number;

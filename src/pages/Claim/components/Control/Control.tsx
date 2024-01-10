@@ -13,10 +13,10 @@ export const Control = observer(() => {
   const { sharesCount, sharesThreshold } = securityStatus;
 
   useEffect(() => {
-    control.startFetchingStatus();
+    control.fetchingStatus = true;
 
     return () => {
-      control.stopFetchingStatus();
+      control.fetchingStatus = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

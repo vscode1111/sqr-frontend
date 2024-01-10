@@ -1,12 +1,14 @@
 import { action, makeObservable, observable } from 'mobx';
 import { controlService } from '~services';
-import { SecurityStatusResponse } from '~types';
+import { SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
 import { BaseStore } from './BaseStore';
 import { RootStore } from './RootStore';
 import { NormalizedError, StatusFetching } from './types';
 
 export class ControlStore extends BaseStore {
+  serviceVersion: VersionResponse;
   securityStatus: SecurityStatusResponse;
+  serviceStats: ServiceStats | null;
 
   fetchStatus: StatusFetching;
   fetchError: NormalizedError;
@@ -17,10 +19,22 @@ export class ControlStore extends BaseStore {
   stopActionStatus: StatusFetching;
   stopActionError: NormalizedError;
 
-  private fetchingStatus: boolean;
+  softResetActionStatus: StatusFetching;
+  softResetActionError: NormalizedError;
+
+  hardResetActionStatus: StatusFetching;
+  hardResetActionError: NormalizedError;
+
+  fetchingStatus: boolean;
+  fetchingStats: boolean;
 
   constructor(rootStore: RootStore) {
     super(rootStore);
+
+    this.serviceVersion = {
+      name: '',
+      version: '',
+    };
 
     this.securityStatus = {
       status: 'waiting',
@@ -28,41 +42,57 @@ export class ControlStore extends BaseStore {
       sharesThreshold: 0,
     };
 
+    this.serviceStats = null;
+
     this.fetchStatus = 'init';
     this.sendActionStatus = 'init';
     this.stopActionStatus = 'init';
+    this.softResetActionStatus = 'init';
+    this.hardResetActionStatus = 'init';
 
     this.fetchingStatus = false;
+    this.fetchingStats = false;
 
     makeObservable(this, {
       // ...baseStoreProps,
       securityStatus: observable,
+      serviceStats: observable,
       fetchStatus: observable,
       fetchError: observable,
       sendActionStatus: observable,
       sendActionError: observable,
       stopActionStatus: observable,
       stopActionError: observable,
+      softResetActionStatus: observable,
+      softResetActionError: observable,
+      hardResetActionStatus: observable,
+      hardResetActionError: observable,
+      fetchVersion: action,
       fetchSecurityStatus: action,
       sendSecurityShare: action,
       stopSecurity: action,
+      softReset: action,
+      hardReset: action,
     });
 
     setInterval(() => {
-      if (!this.fetchingStatus) {
-        return;
+      if (this.fetchingStatus) {
+        this.fetchSecurityStatus();
       }
-
-      this.fetchSecurityStatus();
+      if (this.fetchingStats) {
+        this.fetchStats();
+      }
     }, 1000);
   }
 
-  startFetchingStatus() {
-    this.fetchingStatus = true;
-  }
-
-  stopFetchingStatus() {
-    this.fetchingStatus = false;
+  async fetchVersion() {
+    await this.statusHandler(
+      async () => {
+        this.serviceVersion = await controlService.fetchVersion();
+      },
+      'fetchStatus',
+      'fetchError',
+    );
   }
 
   async fetchSecurityStatus() {
@@ -86,7 +116,12 @@ export class ControlStore extends BaseStore {
 
     await this.statusHandler(
       async () => {
-        this.securityStatus = await controlService.fetchSecurityStatus();
+        try {
+          this.serviceStats = await controlService.fetchStats();
+        } catch (e) {
+          this.serviceStats = null;
+          throw e;
+        }
       },
       'fetchStatus',
       'fetchError',
@@ -111,6 +146,26 @@ export class ControlStore extends BaseStore {
       },
       'stopActionStatus',
       'stopActionError',
+    );
+  }
+
+  async softReset() {
+    await this.statusHandler(
+      async () => {
+        await controlService.softReset();
+      },
+      'softResetActionStatus',
+      'softResetActionError',
+    );
+  }
+
+  async hardReset() {
+    await this.statusHandler(
+      async () => {
+        await controlService.hardReset();
+      },
+      'hardResetActionStatus',
+      'hardResetActionError',
     );
   }
 }

@@ -16,7 +16,7 @@ export const globalStyles = `
     box-sizing: border-box;
     color: ${COLORS.black};
     font-family: 'Galano Grotesque';
-    font-size: 16px;
+    // font-size: 12px;
     flex-direction: column;
     flex: 1;
 
@@ -28,7 +28,7 @@ export const globalStyles = `
   
   button, input, optgroup, select, textarea {
     font-family: 'Galano Grotesque';
-    font-size: 100%;
+    // font-size: 100%;
     line-height: 110%;
   }
         
