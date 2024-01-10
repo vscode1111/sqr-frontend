@@ -33,7 +33,7 @@ export const Monitoring = observer(() => {
       <div className={classes.mainContaniner}>
         <div className={classes.leftPanel}>
           <div className={classes.leftPanelTitle}>
-            <Typography variant='h5'>{`Version: ${serviceVersion?.version}`}</Typography>{' '}
+            <Typography variant='h5'>{`${serviceVersion.name} v${serviceVersion?.version}`}</Typography>{' '}
           </div>
           <div className={classes.leftPanelTitle}>
             <Typography variant='h5'>Stats</Typography>{' '}
