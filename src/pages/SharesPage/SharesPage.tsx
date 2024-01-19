@@ -1,6 +1,6 @@
 import { requestResolver } from './form-utils';
 import { RequestEntity } from './types';
-import { useSharesStyles } from './useSharesStyles';
+import { useSharesPageStyles } from './useSharesPageStyles';
 import { getShares } from './utils';
 import { Button } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
@@ -8,8 +8,8 @@ import { useForm } from 'react-hook-form';
 import { P } from '~common';
 import { CopyText, Loader, PageLayout, TextField } from '~components';
 
-export function Shamirs() {
-  const { classes } = useSharesStyles();
+export function SharesPage() {
+  const { classes } = useSharesPageStyles();
 
   const [isSending, setSending] = useState(false);
   const [resultShares, setResultShares] = useState<string[]>([]);

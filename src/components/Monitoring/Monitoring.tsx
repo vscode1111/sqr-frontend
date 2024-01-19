@@ -2,31 +2,32 @@ import { useMonitoringStyles } from './useMonitoringStyles';
 import { Button, Typography } from '@mui/material';
 import JsonView from '@uiw/react-json-view';
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
 import { Loader } from '~components';
-import { useStores } from '~hooks';
+import { useInitEffect } from '~hooks';
+import { ControlStoreProps } from '~types';
 
-export const Monitoring = observer(() => {
+interface MonitoringProps extends ControlStoreProps {}
+
+export const Monitoring = observer(({ controlStore }: MonitoringProps) => {
   const { classes } = useMonitoringStyles();
-  const { control } = useStores();
+
   const {
     fetchStatus,
     serviceStats,
     serviceVersion,
     softResetActionStatus,
     hardResetActionStatus,
-  } = control;
+  } = controlStore;
 
-  useEffect(() => {
-    control.fetchingStats = true;
+  useInitEffect(() => {
+    controlStore.fetchingStats = true;
 
-    control.fetchVersion();
+    controlStore.fetchVersion();
 
     return () => {
-      control.fetchingStats = false;
+      controlStore.fetchingStats = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <div className={classes.root}>
@@ -48,7 +49,7 @@ export const Monitoring = observer(() => {
           {serviceStats && <JsonView value={serviceStats ?? {}} displayDataTypes={false} />}
         </div>
         <div className={classes.rightPanel}>
-          <Button variant='contained' onClick={() => control.softReset()}>
+          <Button variant='contained' onClick={() => controlStore.softReset()}>
             <Loader
               size={20}
               style={{ visibility: softResetActionStatus === 'fetching' ? 'visible' : 'hidden' }}
@@ -59,7 +60,7 @@ export const Monitoring = observer(() => {
           <Button
             className={classes.hardResetButton}
             variant='contained'
-            onClick={() => control.hardReset()}
+            onClick={() => controlStore.hardReset()}
           >
             <Loader
               size={20}

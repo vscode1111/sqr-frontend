@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import { PageLayout } from '~components';
 
-export function Logout() {
+export function LogoutPage() {
   const { oktaAuth } = useOktaAuth();
 
   const logout = async () => {

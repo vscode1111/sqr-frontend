@@ -1,11 +1,11 @@
 import { action, makeObservable, observable } from 'mobx';
-import { controlService } from '~services';
+import { ControlService } from '~services';
 import { SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
-import { BaseStore } from './BaseStore';
 import { RootStore } from './RootStore';
+import { BaseStore as StoreBase } from './StoreBase';
 import { NormalizedError, StatusFetching } from './types';
 
-export class ControlStore extends BaseStore {
+export class ControlStore extends StoreBase {
   serviceVersion: VersionResponse;
   securityStatus: SecurityStatusResponse;
   serviceStats: ServiceStats | null;
@@ -28,7 +28,10 @@ export class ControlStore extends BaseStore {
   fetchingStatus: boolean;
   fetchingStats: boolean;
 
-  constructor(rootStore: RootStore) {
+  constructor(
+    rootStore: RootStore,
+    private controlService: ControlService,
+  ) {
     super(rootStore);
 
     this.serviceVersion = {
@@ -54,7 +57,8 @@ export class ControlStore extends BaseStore {
     this.fetchingStats = false;
 
     makeObservable(this, {
-      // ...baseStoreProps,
+      // ...(baseStoreProps as any),
+      // statusHandler: action,
       securityStatus: observable,
       serviceStats: observable,
       fetchStatus: observable,
@@ -88,7 +92,7 @@ export class ControlStore extends BaseStore {
   async fetchVersion() {
     await this.statusHandler(
       async () => {
-        this.serviceVersion = await controlService.fetchVersion();
+        this.serviceVersion = await this.controlService.fetchVersion();
       },
       'fetchStatus',
       'fetchError',
@@ -102,7 +106,7 @@ export class ControlStore extends BaseStore {
 
     await this.statusHandler(
       async () => {
-        this.securityStatus = await controlService.fetchSecurityStatus();
+        this.securityStatus = await this.controlService.fetchSecurityStatus();
       },
       'fetchStatus',
       'fetchError',
@@ -117,7 +121,7 @@ export class ControlStore extends BaseStore {
     await this.statusHandler(
       async () => {
         try {
-          this.serviceStats = await controlService.fetchStats();
+          this.serviceStats = await this.controlService.fetchStats();
         } catch (e) {
           this.serviceStats = null;
           throw e;
@@ -132,7 +136,7 @@ export class ControlStore extends BaseStore {
     await this.statusHandler(
       async () => {
         // await sleep(1000);
-        this.securityStatus = await controlService.sendSecurityShare(share);
+        this.securityStatus = await this.controlService.sendSecurityShare(share);
       },
       'sendActionStatus',
       'sendActionError',
@@ -142,7 +146,7 @@ export class ControlStore extends BaseStore {
   async stopSecurity() {
     await this.statusHandler(
       async () => {
-        this.securityStatus = await controlService.stopSecurity();
+        this.securityStatus = await this.controlService.stopSecurity();
       },
       'stopActionStatus',
       'stopActionError',
@@ -152,7 +156,7 @@ export class ControlStore extends BaseStore {
   async softReset() {
     await this.statusHandler(
       async () => {
-        await controlService.softReset();
+        await this.controlService.softReset();
       },
       'softResetActionStatus',
       'softResetActionError',
@@ -162,7 +166,7 @@ export class ControlStore extends BaseStore {
   async hardReset() {
     await this.statusHandler(
       async () => {
-        await controlService.hardReset();
+        await this.controlService.hardReset();
       },
       'hardResetActionStatus',
       'hardResetActionError',

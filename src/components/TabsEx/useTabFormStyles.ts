@@ -1,10 +1,9 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useClaimStyles = makeStyles()((theme) => ({
+export const useTabFormStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'center',
     width: '100%',
     height: '100%',
   },

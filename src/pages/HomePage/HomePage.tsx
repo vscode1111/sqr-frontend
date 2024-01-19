@@ -1,4 +1,4 @@
-import { useHomeStyles } from './useHomeStyles';
+import { useHomePageStyles } from './useHomePageStyles';
 import { Button } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import { observer } from 'mobx-react';
@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ROUTE } from '~constants';
 
-export const Home = observer(() => {
-  const { classes } = useHomeStyles();
+export const HomePage = observer(() => {
+  const { classes } = useHomePageStyles();
 
   const { authState, oktaAuth } = useOktaAuth();
   const navigate = useNavigate();

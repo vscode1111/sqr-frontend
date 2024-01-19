@@ -1,9 +1,10 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useProfileStyles = makeStyles()(() => ({
+export const useTokenPageStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    gap: 21,
+    marginTop: 50,
   },
 }));

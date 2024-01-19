@@ -2,24 +2,25 @@ import { SecurityStatus } from '..';
 import { useControlStyles } from './useHomeStyles';
 import { Button, TextField } from '@mui/material';
 import { observer } from 'mobx-react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Loader } from '~components';
-import { useStores } from '~hooks';
+import { useInitEffect } from '~hooks';
+import { ControlStoreProps } from '~types';
 
-export const Control = observer(() => {
+interface ControlProps extends ControlStoreProps {}
+
+export const Control = observer(({ controlStore }: ControlProps) => {
   const { classes } = useControlStyles();
-  const { control } = useStores();
-  const { securityStatus, sendActionStatus, stopActionStatus } = control;
+  const { securityStatus, sendActionStatus, stopActionStatus } = controlStore;
   const { sharesCount, sharesThreshold } = securityStatus;
 
-  useEffect(() => {
-    control.fetchingStatus = true;
+  useInitEffect(() => {
+    controlStore.fetchingStatus = true;
 
     return () => {
-      control.fetchingStatus = false;
+      controlStore.fetchingStatus = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const sendDisabled = useMemo(
     () => sharesCount >= sharesThreshold,
@@ -30,9 +31,9 @@ export const Control = observer(() => {
   const [share, setShare] = useState('');
 
   const handleSend = useCallback(async () => {
-    await control.sendSecurityShare(share);
+    await controlStore.sendSecurityShare(share);
     setShare('');
-  }, [share, control, setShare]);
+  }, [share, controlStore, setShare]);
 
   return (
     <div className={classes.root}>
@@ -74,7 +75,7 @@ export const Control = observer(() => {
             className={classes.stopButton}
             variant='contained'
             disabled={stopDisabled}
-            onClick={() => control.stopSecurity()}
+            onClick={() => controlStore.stopSecurity()}
           >
             <Loader
               size={20}

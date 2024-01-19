@@ -23,7 +23,7 @@ const dictionary: Record<SecurityStatusType, { name: string; color: string }> = 
 };
 
 export const SecurityStatus = observer(() => {
-  const { control } = useStores();
+  const { claimControl: control } = useStores();
   const { securityStatus, fetchStatus } = control;
   const { status, sharesCount, sharesThreshold } = securityStatus;
   const dictRecord = useMemo(() => dictionary[status], [status]);

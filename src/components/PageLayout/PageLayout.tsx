@@ -10,8 +10,16 @@ import { TabValue } from '~types';
 
 const tabValueList: TabValue[] = [
   {
+    label: 'Token',
+    value: ROUTE.TOKEN,
+  },
+  {
     label: 'Claim',
     value: ROUTE.CLAIM,
+  },
+  {
+    label: 'Lockup',
+    value: ROUTE.LOCKUP,
   },
   {
     label: 'Shares',

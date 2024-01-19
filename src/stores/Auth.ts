@@ -1,5 +1,5 @@
-import { BaseStore } from './BaseStore';
 import { RootStore } from './RootStore';
+import { BaseStore } from './StoreBase';
 
 export class AuthStore extends BaseStore {
   private token: string;

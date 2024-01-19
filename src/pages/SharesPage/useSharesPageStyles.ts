@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useSharesStyles = makeStyles()((theme) => ({
+export const useSharesPageStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

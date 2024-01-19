@@ -1,11 +1,11 @@
-import { useProfileStyles } from './useProfileStyles';
+import { useProfilePageStyles } from './useProfilePageStyles';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { PageLayout } from '~components';
 
-export function Profile() {
-  const { classes } = useProfileStyles();
+export function ProfilePage() {
+  const { classes } = useProfilePageStyles();
 
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState<UserClaims<CustomUserClaims> | null>(null);
@@ -21,7 +21,7 @@ export function Profile() {
     }
   }, [authState, oktaAuth]); // Update if authState changes
 
-  const callBackend = async () => {
+  const callBackend = useCallback(async () => {
     const response = await fetch('http://localhost:3000/version', {
       headers: {
         Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
@@ -34,7 +34,7 @@ export function Profile() {
     const data = await response.json();
     console.log(111, data);
     // setMessages(data.messages);
-  };
+  }, [authState?.accessToken?.accessToken]);
 
   const content = useMemo(() => {
     if (!userInfo) {
