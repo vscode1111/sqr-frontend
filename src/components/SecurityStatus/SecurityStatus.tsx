@@ -4,8 +4,7 @@ import { observer } from 'mobx-react';
 import { useMemo } from 'react';
 import { Loader } from '~components';
 import { COLORS } from '~constants';
-import { useStores } from '~hooks';
-import { SecurityStatusType } from '~types';
+import { ControlStoreProps, SecurityStatusType } from '~types';
 
 const dictionary: Record<SecurityStatusType, { name: string; color: string }> = {
   waiting: {
@@ -22,9 +21,10 @@ const dictionary: Record<SecurityStatusType, { name: string; color: string }> = 
   },
 };
 
-export const SecurityStatus = observer(() => {
-  const { claimControl: control } = useStores();
-  const { securityStatus, fetchStatus } = control;
+interface SecurityStatusProps extends ControlStoreProps {}
+
+export const SecurityStatus = observer(({ controlStore }: SecurityStatusProps) => {
+  const { securityStatus, fetchStatus } = controlStore;
   const { status, sharesCount, sharesThreshold } = securityStatus;
   const dictRecord = useMemo(() => dictionary[status], [status]);
   const { classes } = useSecurityStatus({ color: dictRecord.color });

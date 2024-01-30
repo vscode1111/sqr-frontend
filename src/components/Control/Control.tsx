@@ -68,7 +68,7 @@ export const Control = observer(({ controlStore }: ControlProps) => {
           </Button>
         </div>
         <div className={classes.statusContainer}>
-          <SecurityStatus />
+          <SecurityStatus controlStore={controlStore} />
         </div>
         <div className={classes.stopContainer}>
           <Button
