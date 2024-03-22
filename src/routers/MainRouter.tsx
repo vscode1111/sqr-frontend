@@ -11,6 +11,7 @@ import {
   LogoutPage,
   ProfilePage,
   SharesPage,
+  StakingPage,
   TokenPage,
 } from '~pages';
 
@@ -32,6 +33,7 @@ export function MainRouter() {
           <Route path={`/${ROUTE.TOKEN}`} element={<TokenPage />} />
           <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} />
           <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
+          <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />

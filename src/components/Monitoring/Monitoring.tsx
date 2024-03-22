@@ -46,7 +46,7 @@ export const Monitoring = observer(({ controlStore }: MonitoringProps) => {
               }}
             />
           </div>
-          {serviceStats && <JsonView value={serviceStats ?? {}} displayDataTypes={false} />}
+          {serviceStats && <JsonView value={serviceStats ?? {}} displayDataTypes={false} collapsed={2} />}
         </div>
         <div className={classes.rightPanel}>
           <Button variant='contained' onClick={() => controlStore.softReset()}>

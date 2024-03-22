@@ -22,6 +22,10 @@ const tabValueList: TabValue[] = [
     value: ROUTE.LOCKUP,
   },
   {
+    label: 'Staking',
+    value: ROUTE.STAKING,
+  },
+  {
     label: 'Shares',
     value: ROUTE.SHARES,
   },
