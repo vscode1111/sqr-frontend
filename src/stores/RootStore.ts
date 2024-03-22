@@ -1,4 +1,9 @@
-import { claimControlService, lockupControlService, tokenControlService } from '~services';
+import {
+  claimControlService,
+  lockupControlService,
+  stakingControlService,
+  tokenControlService,
+} from '~services';
 import { AuthStore } from './Auth';
 import { ControlStore } from './ControlStore';
 
@@ -10,13 +15,12 @@ export class RootStore {
   public lockupControl: ControlStore;
   public stakingControl: ControlStore;
 
-
   constructor() {
     this.auth = new AuthStore(this);
 
     this.tokenControl = new ControlStore(this, tokenControlService);
     this.claimControl = new ControlStore(this, claimControlService);
     this.lockupControl = new ControlStore(this, lockupControlService);
-    this.stakingControl = new ControlStore(this, tokenControlService);
+    this.stakingControl = new ControlStore(this, stakingControlService);
   }
 }

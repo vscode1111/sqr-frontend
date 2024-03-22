@@ -3,7 +3,6 @@ import { makeStyles } from 'tss-react/mui';
 export const useMonitoringStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
-    // justifyContent: 'center',
     width: '100%',
     height: '100%',
   },
@@ -22,10 +21,20 @@ export const useMonitoringStyles = makeStyles()((theme) => ({
   leftPanelTitle: {
     display: 'flex',
     alignItems: 'center',
-    // justifyContent: 'center',
     gap: 10,
   },
   rightPanel: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    gap: 20,
+  },
+  rightPanelTop: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 20,
+  },
+  rightPanelBottom: {
     display: 'flex',
     flexDirection: 'column',
     gap: 20,
