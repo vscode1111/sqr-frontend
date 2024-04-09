@@ -1,6 +1,7 @@
 import {
   claimControlService,
   lockupControlService,
+  signatureControlService,
   stakingControlService,
   tokenControlService,
 } from '~services';
@@ -14,6 +15,7 @@ export class RootStore {
   public claimControl: ControlStore;
   public lockupControl: ControlStore;
   public stakingControl: ControlStore;
+  public signatureControl: ControlStore;
 
   constructor() {
     this.auth = new AuthStore(this);
@@ -22,5 +24,6 @@ export class RootStore {
     this.claimControl = new ControlStore(this, claimControlService);
     this.lockupControl = new ControlStore(this, lockupControlService);
     this.stakingControl = new ControlStore(this, stakingControlService);
+    this.signatureControl = new ControlStore(this, signatureControlService);
   }
 }

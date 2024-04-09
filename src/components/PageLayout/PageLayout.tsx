@@ -26,6 +26,10 @@ const tabValueList: TabValue[] = [
     value: ROUTE.STAKING,
   },
   {
+    label: 'Signature',
+    value: ROUTE.SIGNATURE,
+  },
+  {
     label: 'Shares',
     value: ROUTE.SHARES,
   },

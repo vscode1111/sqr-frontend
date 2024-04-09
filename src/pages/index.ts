@@ -4,5 +4,6 @@ export * from './LockupPage';
 export * from './LogoutPage';
 export * from './ProfilePage';
 export * from './SharesPage';
-export * from './TokenPage';
+export * from './SignaturePage';
 export * from './StakingPage';
+export * from './TokenPage';

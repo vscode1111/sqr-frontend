@@ -11,6 +11,7 @@ import {
   LogoutPage,
   ProfilePage,
   SharesPage,
+  SignaturePage,
   StakingPage,
   TokenPage,
 } from '~pages';
@@ -34,6 +35,7 @@ export function MainRouter() {
           <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} />
           <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
           <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
+          <Route path={`/${ROUTE.SIGNATURE}`} element={<SignaturePage />} />
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
