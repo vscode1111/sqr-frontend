@@ -5,6 +5,7 @@ export enum ROUTE {
   LOCKUP = 'lockup',
   STAKING = 'staking',
   SIGNATURE = 'signature',
+  LAUNCHPAD = 'launchpad',
   PROFILE = 'profile',
   SHARES = 'shares',
   VALIDATORS = 'validators',

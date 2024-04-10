@@ -1,5 +1,6 @@
 export * from './ClaimPage';
 export * from './HomePage';
+export * from './LaunchpadPage';
 export * from './LockupPage';
 export * from './LogoutPage';
 export * from './ProfilePage';

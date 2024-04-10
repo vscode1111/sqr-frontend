@@ -7,6 +7,7 @@ import { ROUTE } from '~constants';
 import {
   ClaimPage,
   HomePage,
+  LaunchpadPage,
   LockupPage,
   LogoutPage,
   ProfilePage,
@@ -36,6 +37,7 @@ export function MainRouter() {
           <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
           <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
           <Route path={`/${ROUTE.SIGNATURE}`} element={<SignaturePage />} />
+          <Route path={`/${ROUTE.LAUNCHPAD}`} element={<LaunchpadPage />} />
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
