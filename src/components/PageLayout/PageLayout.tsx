@@ -26,12 +26,12 @@ const tabValueList: TabValue[] = [
     value: ROUTE.STAKING,
   },
   {
-    label: 'Launchpad',
-    value: ROUTE.LAUNCHPAD,
-  },
-  {
     label: 'Signature',
     value: ROUTE.SIGNATURE,
+  },
+  {
+    label: 'Launchpad',
+    value: ROUTE.LAUNCHPAD,
   },
   {
     label: 'Shares',
