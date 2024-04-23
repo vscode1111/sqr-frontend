@@ -1,7 +1,7 @@
 {
   "name": "sqr-claim-frontend",
   "private": true,
-  "version": "0.0.27",
+  "version": "0.0.28",
   "scripts": {
     "commit": "git-cz",
     "dev": "cross-env NODE_ENV=local vite",
@@ -60,7 +60,7 @@
     "@vitejs/plugin-react-swc": "^3.6.0",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
-    "eslint": "^9.1.1",
+    "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "http-server": "^14.1.1",
