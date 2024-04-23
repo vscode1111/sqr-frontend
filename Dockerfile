@@ -9,7 +9,7 @@ COPY ./tsconfig.json .
 COPY ./vite.config.ts .
 COPY ./index.html .
 ENV NODE_ENV=prod
-RUN npm i
+RUN npm ci
 #CMD npm run dev:prod
 
 RUN npm run build:prod
