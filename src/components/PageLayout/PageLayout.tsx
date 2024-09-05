@@ -46,7 +46,7 @@ interface PageLayoutProps {
 export function PageLayout({ children }: PageLayoutProps) {
   const { classes } = usePageLayoutStyles();
 
-  const { oktaAuth } = useOktaAuth();
+  const { oktaAuth, authState } = useOktaAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -114,17 +114,19 @@ export function PageLayout({ children }: PageLayoutProps) {
             ))}
           </Tabs>
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton
-            size='large'
-            edge='end'
-            aria-label='account of current user'
-            aria-controls={menuId}
-            aria-haspopup='true'
-            onClick={handleProfileMenuOpen}
-            color='inherit'
-          >
-            <AccountCircle />
-          </IconButton>
+          {authState?.isAuthenticated && (
+            <IconButton
+              size='large'
+              edge='end'
+              aria-label='account of current user'
+              aria-controls={menuId}
+              aria-haspopup='true'
+              onClick={handleProfileMenuOpen}
+              color='inherit'
+            >
+              <AccountCircle />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
       <div className={classes.children}>{children}</div>
