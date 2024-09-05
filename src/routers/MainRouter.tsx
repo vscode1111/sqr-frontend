@@ -1,9 +1,11 @@
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { Security } from '@okta/okta-react';
+import { useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { LoginCallbackEx, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
+import { useIsLocalhost } from '~hooks';
 import {
   ClaimPage,
   HomePage,
@@ -22,10 +24,22 @@ const CALLBACK_PATH = '/login/callback';
 const oktaAuth = new OktaAuth(oktaConfig);
 
 export function MainRouter() {
+  const isLocalhost = useIsLocalhost();
+
   const navigate = useNavigate();
-  const restoreOriginalUri = async (_oktaAuth: OktaAuth, originalUri: string) => {
-    navigate(toRelativeUrl(originalUri || '/', window.location.origin));
-  };
+
+  const restoreOriginalUri = useCallback(
+    (_oktaAuth: OktaAuth, originalUri: string) => {
+      console.log(333, 'restoreOriginalUri');
+
+      if (isLocalhost) {
+        return;
+      }
+
+      navigate(toRelativeUrl(originalUri || '/', window.location.origin));
+    },
+    [isLocalhost, navigate],
+  );
 
   return (
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>

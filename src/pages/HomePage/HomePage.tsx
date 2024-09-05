@@ -2,21 +2,33 @@ import { useHomePageStyles } from './useHomePageStyles';
 import { Button } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ROUTE } from '~constants';
+import { useIsLocalhost } from '~hooks';
 
 export const HomePage = observer(() => {
   const { classes } = useHomePageStyles();
 
   const { authState, oktaAuth } = useOktaAuth();
   const navigate = useNavigate();
+  const isLocalhost = useIsLocalhost();
 
-  const login = () => oktaAuth.signInWithRedirect({ originalUri: `/${ROUTE.CLAIM}` });
+  const login = useCallback(() => {
+    oktaAuth.signInWithRedirect({ originalUri: `/${ROUTE.CLAIM}` });
+  }, [oktaAuth]);
 
   useEffect(() => {
-    navigate(authState?.isAuthenticated ? `/${ROUTE.CLAIM}` : '/');
-  }, [authState?.isAuthenticated, navigate]);
+    if (isLocalhost) {
+      navigate(`/${ROUTE.CLAIM}`);
+    } else {
+      navigate(authState?.isAuthenticated ? `/${ROUTE.CLAIM}` : '/');
+    }
+  }, [isLocalhost, authState?.isAuthenticated, navigate]);
+
+  if (isLocalhost) {
+    return <Outlet />;
+  }
 
   if (!authState) {
     return <div>Loading authentication...</div>;
@@ -33,7 +45,6 @@ export const HomePage = observer(() => {
       </div>
     );
   } else {
-    // return 'You authenticated';
     return <Outlet />;
   }
 });

@@ -2,7 +2,7 @@ import { usePageLayoutStyles } from './usePageLayoutStyles';
 import { AccountCircle } from '@mui/icons-material';
 import { AppBar, Box, IconButton, Menu, MenuItem, Tab, Tabs, Toolbar } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { uid } from 'react-uid';
 import { ROUTE } from '~constants';
@@ -55,22 +55,32 @@ export function PageLayout({ children }: PageLayoutProps) {
   const isMenuOpen = Boolean(anchorEl);
   const [tab, setTab] = useState(location.pathname.replace('/', ''));
 
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
-    setTab(newValue);
-    navigate(`/${newValue}`);
-  };
+  const handleTabChange = useCallback(
+    (_event: React.SyntheticEvent, newValue: string) => {
+      setTab(newValue);
+      navigate(`/${newValue}`);
+    },
+    [setTab, navigate],
+  );
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleProfileMenuOpen = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    },
+    [setAnchorEl],
+  );
 
-  const handleMenuClose = () => {
+  const handleMenuClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, [setAnchorEl]);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     await oktaAuth.signOut();
-  };
+  }, [oktaAuth]);
+
+  const navigateToProfile = useCallback(() => {
+    navigate(`/${ROUTE.PROFILE}`);
+  }, [navigate]);
 
   const menuId = 'primary-account-menu';
   const renderMenu = (
@@ -89,7 +99,7 @@ export function PageLayout({ children }: PageLayoutProps) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => navigate(`/${ROUTE.PROFILE}`)}>Profile</MenuItem>
+      <MenuItem onClick={navigateToProfile}>Profile</MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
