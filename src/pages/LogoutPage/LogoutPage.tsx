@@ -1,13 +1,17 @@
 import { Button } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
+import { useCallback } from 'react';
 import { PageLayout } from '~components';
 
 export function LogoutPage() {
   const { oktaAuth } = useOktaAuth();
 
-  const logout = async () => {
-    await oktaAuth.signOut();
-  };
+  const logout = useCallback(
+    () => async () => {
+      await oktaAuth.signOut();
+    },
+    [oktaAuth],
+  );
 
   return (
     <PageLayout>
