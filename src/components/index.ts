@@ -1,5 +1,6 @@
 export * from './Control';
 export * from './CopyText';
+export * from './Layout';
 export * from './Loader';
 export * from './Loading';
 export * from './LoginCallbackEx';

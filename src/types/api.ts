@@ -1,3 +1,5 @@
+import { NF } from '~common';
+
 export type SecurityStatusType = 'waiting' | 'running' | 'error';
 
 export interface VersionResponse {
@@ -42,3 +44,19 @@ export interface Metrics {
   lastSuccess: Date;
   data: any;
 }
+
+export interface ContractDTO {
+  id: number;
+  networkId: number;
+  address: string;
+  type: string;
+  name: string | null;
+  disable: boolean;
+  syncBlockNumber: number;
+  processBlockNumber: number;
+  data: Object | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export const FContractDTO = NF<ContractDTO>();
