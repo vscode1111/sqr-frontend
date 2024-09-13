@@ -34,7 +34,7 @@ export const Monitoring = observer(({ controlStore }: MonitoringProps) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.mainContaniner}>
+      <div className={classes.mainContainer}>
         <div className={classes.leftPanel}>
           <div className={classes.leftPanelTitle}>
             <Typography variant='h5'>{`${serviceVersion.name} v${serviceVersion?.version}`}</Typography>{' '}

@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { ControlService } from '~services';
-import { SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
+import { NetworkRecord, SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
 import { RootStore } from './RootStore';
 import { BaseStore as StoreBase } from './StoreBase';
 import { NormalizedError, StatusFetching } from './types';
@@ -9,6 +9,8 @@ export class ControlStore extends StoreBase {
   serviceVersion: VersionResponse;
   securityStatus: SecurityStatusResponse;
   serviceStats: ServiceStats | null;
+  serviceContractTypes: string[] | null;
+  serviceNetworks: NetworkRecord[] | null;
 
   fetchStatus: StatusFetching;
   fetchError: NormalizedError;
@@ -46,6 +48,8 @@ export class ControlStore extends StoreBase {
     };
 
     this.serviceStats = null;
+    this.serviceContractTypes = null;
+    this.serviceNetworks = null;
 
     this.fetchStatus = 'init';
     this.sendActionStatus = 'init';
@@ -61,6 +65,8 @@ export class ControlStore extends StoreBase {
       // statusHandler: action,
       securityStatus: observable,
       serviceStats: observable,
+      serviceContractTypes: observable,
+      serviceNetworks: observable,
       fetchStatus: observable,
       fetchError: observable,
       sendActionStatus: observable,
@@ -78,6 +84,11 @@ export class ControlStore extends StoreBase {
       softReset: action,
       hardReset: action,
     });
+
+    // setTimeout(() => {
+    //   console.log(111, this.controlService.getRouter());
+    //   this.fetchNetworks();
+    // });
 
     setInterval(() => {
       if (this.fetchingStatus) {
@@ -124,6 +135,36 @@ export class ControlStore extends StoreBase {
           this.serviceStats = await this.controlService.fetchStats();
         } catch (e) {
           this.serviceStats = null;
+          throw e;
+        }
+      },
+      'fetchStatus',
+      'fetchError',
+    );
+  }
+
+  async fetchContractTypes() {
+    await this.statusHandler(
+      async () => {
+        try {
+          this.serviceContractTypes = await this.controlService.fetchContractTypes();
+        } catch (e) {
+          this.serviceContractTypes = null;
+          throw e;
+        }
+      },
+      'fetchStatus',
+      'fetchError',
+    );
+  }
+
+  async fetchNetworks() {
+    await this.statusHandler(
+      async () => {
+        try {
+          this.serviceNetworks = await this.controlService.fetchNetworks();
+        } catch (e) {
+          this.serviceNetworks = null;
           throw e;
         }
       },

@@ -7,7 +7,7 @@ import { daServer } from '~ra-services';
 
 export function RaApp() {
   return (
-    <Admin layout={Layout} dataProvider={daServer('http://localhost:3000/manage')}>
+    <Admin layout={Layout} dataProvider={daServer('http://localhost:3000/db')}>
       <Resource
         // name={ROUTE.LAUNCHPAD}
         name={'contracts'}

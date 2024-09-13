@@ -6,7 +6,7 @@ export const useMonitoringStyles = makeStyles()((theme) => ({
     width: '100%',
     height: '100%',
   },
-  mainContaniner: {
+  mainContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: 30,

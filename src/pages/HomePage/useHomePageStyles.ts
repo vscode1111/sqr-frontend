@@ -6,7 +6,7 @@ export const useHomePageStyles = makeStyles()((theme) => ({
     justifyContent: 'center',
     height: 'calc(100vh - 100px)',
   },
-  mainContaniner: {
+  mainContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

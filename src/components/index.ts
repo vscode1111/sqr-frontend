@@ -6,6 +6,7 @@ export * from './Loading';
 export * from './LoginCallbackEx';
 export * from './Monitoring';
 export * from './PageLayout';
+export * from './RowLayout';
 export * from './SecureRoute';
 export * from './SecurityStatus';
 export * from './TabsEx';

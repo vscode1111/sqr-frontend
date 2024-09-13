@@ -20,6 +20,13 @@ export interface ServiceStats {
   db: DB;
 }
 
+export interface NetworkRecord {
+  id: number;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface DB {
   _events: number;
   transactionItems: number;
@@ -54,7 +61,7 @@ export interface ContractDTO {
   disable: boolean;
   syncBlockNumber: number;
   processBlockNumber: number;
-  data: Object | null;
+  data: object | null;
   createdAt: Date;
   updatedAt: Date;
 }

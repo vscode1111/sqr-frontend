@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import {
   BooleanInput,
   Create,
@@ -6,37 +7,47 @@ import {
   SelectInput,
   SimpleForm,
   TextInput,
-} from "react-admin";
-import { contractTypeChoices } from "~constants";
-import { FContractDTO } from "~types";
+} from 'react-admin';
+import { RowLayout } from '~components';
+import { useSelectChoices } from '~hooks';
+import { FContractDTO } from '~types';
 
-export function LaunchpadCreate() {
+export const LaunchpadCreate = observer(() => {
+  const { networksChoices, contractTypeChoices } = useSelectChoices();
+
   return (
     <Create>
       <SimpleForm>
-        <TextInput
-          label="Address"
-          source={FContractDTO("address")}
-          validate={required()}
-        />
-        <SelectInput
-          source={FContractDTO("type")}
-          choices={contractTypeChoices}
-          validate={required()}
-        />
-        <TextInput label="name" source={FContractDTO("name")} />
-        <NumberInput
-          label="Sync block number"
-          source={FContractDTO("syncBlockNumber")}
-          validate={required()}
-        />
-        <NumberInput
-          label="Process block number"
-          source={FContractDTO("processBlockNumber")}
-          validate={required()}
-        />
-        <BooleanInput label="Disable" source={FContractDTO("disable")} />
+        <RowLayout flexs={[1, 2]}>
+          <SelectInput
+            source={FContractDTO('networkId')}
+            choices={networksChoices}
+            validate={required()}
+          />
+          <TextInput label='Address' source={FContractDTO('address')} validate={required()} />
+        </RowLayout>
+        <RowLayout flexs={[1, 2]}>
+          <SelectInput
+            source={FContractDTO('type')}
+            choices={contractTypeChoices}
+            validate={required()}
+          />
+          <TextInput label='name' source={FContractDTO('name')} />
+        </RowLayout>
+        <RowLayout>
+          <NumberInput
+            label='Sync block number'
+            source={FContractDTO('syncBlockNumber')}
+            validate={required()}
+          />
+          <NumberInput
+            label='Process block number'
+            source={FContractDTO('processBlockNumber')}
+            validate={required()}
+          />
+        </RowLayout>
+        <BooleanInput label='Disable' source={FContractDTO('disable')} />
       </SimpleForm>
     </Create>
   );
-}
+});

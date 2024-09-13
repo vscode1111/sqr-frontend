@@ -1,9 +1,13 @@
 import axios from 'axios';
-import { SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
+import { NetworkRecord, SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
 import { getBaseUrl, getCommonConfig } from './common';
 
 export class ControlService {
   constructor(private route: string) {}
+
+  getRouter() {
+    return this.route;
+  }
 
   async fetchVersion(): Promise<VersionResponse> {
     const { data } = await axios.get(`${getBaseUrl(this.route)}/version`, getCommonConfig());
@@ -42,6 +46,19 @@ export class ControlService {
       `${getBaseUrl(this.route)}/indexer/bsc/stats`,
       getCommonConfig(),
     );
+    return data;
+  }
+
+  async fetchContractTypes(): Promise<string[]> {
+    const { data } = await axios.get(
+      `${getBaseUrl(this.route)}/db/contract-types`,
+      getCommonConfig(),
+    );
+    return data;
+  }
+
+  async fetchNetworks(): Promise<NetworkRecord[]> {
+    const { data } = await axios.get(`${getBaseUrl(this.route)}/db/networks`, getCommonConfig());
     return data;
   }
 
