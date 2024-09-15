@@ -1,5 +1,5 @@
 import { SecurityStatus } from '..';
-import { useControlStyles } from './useHomeStyles';
+import { useIndexerSharesStyles } from './useIndexerSharesStyles';
 import { Button, TextField } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useCallback, useMemo, useState } from 'react';
@@ -9,8 +9,8 @@ import { ControlStoreProps } from '~types';
 
 interface ControlProps extends ControlStoreProps {}
 
-export const Control = observer(({ controlStore }: ControlProps) => {
-  const { classes } = useControlStyles();
+export const IndexerShares = observer(({ controlStore }: ControlProps) => {
+  const { classes } = useIndexerSharesStyles();
   const { securityStatus, sendActionStatus, stopActionStatus } = controlStore;
   const { sharesCount, sharesThreshold } = securityStatus;
 
@@ -37,7 +37,7 @@ export const Control = observer(({ controlStore }: ControlProps) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.mainContaniner}>
+      <div className={classes.mainContainer}>
         <div className={classes.inputContainer}>
           <TextField
             className={classes.shareInput}

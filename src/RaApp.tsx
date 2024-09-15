@@ -1,21 +1,25 @@
-import { Admin, Resource } from 'react-admin';
-import { Layout } from '~components';
-import { LaunchpadCreate, LaunchpadEdit, LaunchpadList } from '~ra-pages';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+import { Admin, CustomRoutes, Resource } from 'react-admin';
+import { Route } from 'react-router-dom';
+import { MainLayout } from '~components';
+import { ContractCreate, ContractEdit, ContractList, SharesPage } from '~ra-pages';
+import { MonitoringPage } from '~ra-pages/MonitoringPage';
 import { daServer } from '~ra-services';
-
-// import PostIcon from '@material-ui/icons/Book';
 
 export function RaApp() {
   return (
-    <Admin layout={Layout} dataProvider={daServer('http://localhost:3000/db')}>
+    <Admin layout={MainLayout} dataProvider={daServer('http://localhost:3000/db')}>
       <Resource
-        // name={ROUTE.LAUNCHPAD}
         name={'contracts'}
-        // icon={PostIcon}
-        list={LaunchpadList}
-        edit={LaunchpadEdit}
-        create={LaunchpadCreate}
+        icon={DocumentScannerIcon}
+        list={ContractList}
+        edit={ContractEdit}
+        create={ContractCreate}
       />
+      <CustomRoutes>
+        <Route path={'/shares'} element={<SharesPage />} />
+        <Route path={'/monitoring'} element={<MonitoringPage />} />
+      </CustomRoutes>
     </Admin>
   );
 }

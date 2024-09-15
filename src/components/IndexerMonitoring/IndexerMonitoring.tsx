@@ -1,4 +1,4 @@
-import { useMonitoringStyles } from './useMonitoringStyles';
+import { useIndexerMonitoringStyles } from './useIndexerMonitoringStyles';
 import { Button, Typography } from '@mui/material';
 import JsonView from '@uiw/react-json-view';
 import { observer } from 'mobx-react';
@@ -9,8 +9,8 @@ import { ControlStoreProps } from '~types';
 
 interface MonitoringProps extends ControlStoreProps {}
 
-export const Monitoring = observer(({ controlStore }: MonitoringProps) => {
-  const { classes } = useMonitoringStyles();
+export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) => {
+  const { classes } = useIndexerMonitoringStyles();
 
   const [collapsed, setCollapsed] = useState<number | boolean>(2);
 

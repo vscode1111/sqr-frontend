@@ -5,7 +5,7 @@ import { getBaseUrl, getCommonConfig } from './common';
 export class ControlService {
   constructor(private route: string) {}
 
-  getRouter() {
+  getRoute() {
     return this.route;
   }
 

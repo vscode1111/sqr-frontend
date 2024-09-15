@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useMonitoringStyles = makeStyles()((theme) => ({
+export const useIndexerMonitoringStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
     width: '100%',

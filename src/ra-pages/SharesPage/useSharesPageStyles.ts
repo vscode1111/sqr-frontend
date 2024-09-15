@@ -1,10 +1,10 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useLaunchpadPageStyles = makeStyles()(() => ({
+export const useSharesPageStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     gap: 21,
-    marginTop: 50,
+    marginTop: 30,
   },
 }));

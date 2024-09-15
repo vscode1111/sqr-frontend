@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
 import { CheckForApplicationUpdate, Layout as RALayout } from 'react-admin';
+import { PageMenu } from '~components';
 
-export function Layout({ children }: { children: ReactNode }) {
+export function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <RALayout>
+    <RALayout menu={PageMenu}>
       {children}
       <CheckForApplicationUpdate />
     </RALayout>

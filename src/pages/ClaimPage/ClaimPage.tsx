@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import { useMemo } from 'react';
-import { Control, Monitoring, TabForm } from '~components';
-import { PageLayout } from '~components';
+import { IndexerMonitoring, IndexerShares, PageLayout, TabForm } from '~components';
 import { useStores } from '~hooks';
 import { TabValue } from '~types';
 
@@ -13,12 +12,12 @@ export const ClaimPage = observer(() => {
       {
         label: 'Control',
         value: 'control',
-        Form: () => <Control controlStore={claimControl} />,
+        Form: () => <IndexerShares controlStore={claimControl} />,
       },
       {
         label: 'Monitoring',
         value: 'monitoring',
-        Form: () => <Monitoring controlStore={claimControl} />,
+        Form: () => <IndexerMonitoring controlStore={claimControl} />,
       },
     ],
     [claimControl],

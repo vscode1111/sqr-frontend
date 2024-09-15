@@ -25,7 +25,7 @@ function CompanyListActions() {
   );
 }
 
-export const LaunchpadList = observer(() => {
+export const ContractList = observer(() => {
   const { networksMap } = useSelectChoices();
 
   return (

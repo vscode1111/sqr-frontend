@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import { useMemo } from 'react';
-import { Monitoring, TabForm } from '~components';
-import { PageLayout } from '~components';
+import { IndexerMonitoring, PageLayout, TabForm } from '~components';
 import { useStores } from '~hooks';
 import { TabValue } from '~types';
 
@@ -13,7 +12,7 @@ export const TokenPage = observer(() => {
       {
         label: 'Monitoring',
         value: 'monitoring',
-        Form: () => <Monitoring controlStore={tokenControl} />,
+        Form: () => <IndexerMonitoring controlStore={tokenControl} />,
       },
     ],
     [tokenControl],

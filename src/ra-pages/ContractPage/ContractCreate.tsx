@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react';
 import {
   BooleanInput,
-  DateTimeInput,
-  Edit,
+  Create,
   NumberInput,
   required,
   SelectInput,
@@ -13,11 +12,11 @@ import { RowLayout } from '~components';
 import { useSelectChoices } from '~hooks';
 import { FContractDTO } from '~types';
 
-export const LaunchpadEdit = observer(() => {
+export const ContractCreate = observer(() => {
   const { networksChoices, contractTypeChoices } = useSelectChoices();
 
   return (
-    <Edit mutationMode='optimistic'>
+    <Create>
       <SimpleForm>
         <RowLayout flexs={[1, 2]}>
           <SelectInput
@@ -25,7 +24,7 @@ export const LaunchpadEdit = observer(() => {
             choices={networksChoices}
             validate={required()}
           />
-          <TextInput label='Address' source={FContractDTO('address')} />
+          <TextInput label='Address' source={FContractDTO('address')} validate={required()} />
         </RowLayout>
         <RowLayout flexs={[1, 2]}>
           <SelectInput
@@ -48,11 +47,7 @@ export const LaunchpadEdit = observer(() => {
           />
         </RowLayout>
         <BooleanInput label='Disable' source={FContractDTO('disable')} />
-        <RowLayout>
-          <DateTimeInput label='Created' source={FContractDTO('createdAt')} disabled />
-          <DateTimeInput label='Updated' source={FContractDTO('updatedAt')} disabled />
-        </RowLayout>
       </SimpleForm>
-    </Edit>
+    </Create>
   );
 });
