@@ -98,8 +98,6 @@ export function daServer(apiUrl: string): DataProvider {
     create: async (resource, params) => {
       const { data } = params;
 
-      console.log(111, data);
-
       const { json } = await httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(data),

@@ -78,10 +78,12 @@ export const RaContent = observer(() => {
 
   const { firstView } = useTabValue(route);
 
-  console.log(100, route, firstView);
-
   return (
-    <Admin layout={MainLayout} dataProvider={daServer(`${getBaseUrl(route)}/db`)}>
+    <Admin
+      basename={`/${route}`}
+      layout={MainLayout}
+      dataProvider={daServer(`${getBaseUrl(route)}/db`)}
+    >
       <Resource
         name={SUB_ROUTE.CONTRACTS}
         icon={DocumentScannerIcon}
