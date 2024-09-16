@@ -26,7 +26,7 @@ export function TabForm({ list }: TabsExProps) {
           <Tab key={uid(route)} label={label} value={route} />
         ))}
       </Tabs>
-      <div className={classes.mainContaniner}>{currentForm?.()}</div>
+      <div className={classes.mainContainer}>{currentForm?.()}</div>
     </div>
   );
 }

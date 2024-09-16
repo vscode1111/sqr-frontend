@@ -6,11 +6,13 @@ import {
   stakingControlService,
   tokenControlService,
 } from '~services';
-import { AuthStore } from './Auth';
+import { AuthStore } from './AuthStore';
 import { ControlStore } from './ControlStore';
+import { UiStore } from './UiStore';
 
 export class RootStore {
   public auth: AuthStore;
+  public ui: UiStore;
 
   public tokenControl: ControlStore;
   public claimControl: ControlStore;
@@ -21,6 +23,7 @@ export class RootStore {
 
   constructor() {
     this.auth = new AuthStore(this);
+    this.ui = new UiStore(this);
 
     this.tokenControl = new ControlStore(this, tokenControlService);
     this.claimControl = new ControlStore(this, claimControlService);

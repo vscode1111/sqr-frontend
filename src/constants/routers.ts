@@ -7,6 +7,12 @@ export enum ROUTE {
   SIGNATURE = 'signature',
   LAUNCHPAD = 'launchpad',
   PROFILE = 'profile',
-  SHARES = 'shares',
+  GENERATE_SHARES = 'generate-shares',
   VALIDATORS = 'validators',
+}
+
+export enum SUB_ROUTE {
+  SHARES = 'shares',
+  MONITORING = 'monitoring',
+  CONTRACTS = 'contracts',
 }

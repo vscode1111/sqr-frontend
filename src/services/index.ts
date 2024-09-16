@@ -1,6 +1,7 @@
-import { ControlService } from './ContolService';
+import { ControlService } from './ControlService';
 
-export * from './ContolService';
+export * from './common';
+export * from './ControlService';
 
 export const tokenControlService = new ControlService('token');
 export const claimControlService = new ControlService('claim');

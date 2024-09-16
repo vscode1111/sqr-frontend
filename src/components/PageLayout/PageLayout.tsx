@@ -5,39 +5,8 @@ import { useOktaAuth } from '@okta/okta-react';
 import { ReactNode, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { uid } from 'react-uid';
+import { TabValueList } from '~configs';
 import { ROUTE } from '~constants';
-import { TabValue } from '~types';
-
-const tabValueList: TabValue[] = [
-  {
-    label: 'Token',
-    value: ROUTE.TOKEN,
-  },
-  {
-    label: 'Claim',
-    value: ROUTE.CLAIM,
-  },
-  {
-    label: 'Lockup',
-    value: ROUTE.LOCKUP,
-  },
-  {
-    label: 'Staking',
-    value: ROUTE.STAKING,
-  },
-  {
-    label: 'Signature',
-    value: ROUTE.SIGNATURE,
-  },
-  {
-    label: 'Launchpad',
-    value: ROUTE.LAUNCHPAD,
-  },
-  {
-    label: 'Shares',
-    value: ROUTE.SHARES,
-  },
-];
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -109,7 +78,7 @@ export function PageLayout({ children }: PageLayoutProps) {
       <AppBar className={classes.appBar} position='static'>
         <Toolbar className={classes.toolbar}>
           <Tabs value={tab} onChange={handleTabChange}>
-            {tabValueList.map(({ value: route, label }) => (
+            {TabValueList.map(({ value: route, label }) => (
               <Tab key={uid(route)} label={label} value={route} />
             ))}
           </Tabs>

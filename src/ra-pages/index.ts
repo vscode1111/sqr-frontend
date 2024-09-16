@@ -1,2 +1,3 @@
 export * from './ContractPage';
-export * from './SharesPage/SharesPage';
+export * from './MonitoringPage';
+export * from './SharesPage';

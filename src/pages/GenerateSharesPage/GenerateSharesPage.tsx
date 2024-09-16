@@ -6,9 +6,9 @@ import { Button } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { P } from '~common';
-import { CopyText, Loader, PageLayout, TextField } from '~components';
+import { CopyText, Loader, TextField } from '~components';
 
-export function SharesPage() {
+export function GenerateSharesPage() {
   const { classes } = useSharesPageStyles();
 
   const [isSending, setSending] = useState(false);
@@ -44,7 +44,7 @@ export function SharesPage() {
   }, [thresholdWatch, trigger]);
 
   return (
-    <PageLayout>
+    <div>
       <div className={classes.root}>
         <div className={classes.inputRow1}>
           <TextField
@@ -109,6 +109,6 @@ export function SharesPage() {
           ))}
         </div>
       )}
-    </PageLayout>
+    </div>
   );
 }

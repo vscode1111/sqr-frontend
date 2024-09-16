@@ -2,21 +2,20 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { Security } from '@okta/okta-react';
 import { useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { RaApp } from '~RaApp';
 import { LoginCallbackEx, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
 import { useIsLocalhost } from '~hooks';
 import {
-  ClaimPage,
+  GenerateSharesPage,
   HomePage,
   LaunchpadPage,
   LockupPage,
   LogoutPage,
   ProfilePage,
-  SharesPage,
   SignaturePage,
   StakingPage,
-  TokenPage,
 } from '~pages';
 
 const CALLBACK_PATH = '/login/callback';
@@ -30,8 +29,6 @@ export function MainRouter() {
 
   const restoreOriginalUri = useCallback(
     (_oktaAuth: OktaAuth, originalUri: string) => {
-      console.log(333, 'restoreOriginalUri');
-
       if (isLocalhost) {
         return;
       }
@@ -46,8 +43,10 @@ export function MainRouter() {
       <Routes>
         <Route path='/' element={<HomePage />}></Route>
         <Route element={<RequiredAuth />}>
-          <Route path={`/${ROUTE.TOKEN}`} element={<TokenPage />} />
-          <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} />
+          {/* <Route path={`/${ROUTE.TOKEN}`} element={<TokenPage />} /> */}
+          {/* <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} /> */}
+          <Route path={`/${ROUTE.TOKEN}/*`} element={<RaApp />} />
+          <Route path={`/${ROUTE.CLAIM}/*`} element={<RaApp />} />
           <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
           <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
           <Route path={`/${ROUTE.SIGNATURE}`} element={<SignaturePage />} />
@@ -55,7 +54,7 @@ export function MainRouter() {
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
-        <Route path={`/${ROUTE.SHARES}`} element={<SharesPage />} />
+        <Route path={`/${ROUTE.GENERATE_SHARES}`} element={<GenerateSharesPage />} />
         <Route path={`/${ROUTE.LOGOUT}`} element={<LogoutPage />} />
       </Routes>
     </Security>
