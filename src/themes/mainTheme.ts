@@ -1,6 +1,10 @@
-import { createTheme } from '@mui/material/styles';
+import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { deepmerge } from '@mui/utils';
+import { defaultDarkTheme, defaultLightTheme } from 'react-admin';
 import { COLORS, TRANSITION } from '~constants';
 import { globalStyles } from './globalStyles';
+
+//ToDo: clean
 
 const baseTheme = createTheme({
   colors: COLORS,
@@ -34,7 +38,7 @@ const baseTheme = createTheme({
   },
 });
 
-export const theme = createTheme(baseTheme, {
+export const mainTheme = createTheme(baseTheme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: globalStyles,
@@ -264,7 +268,7 @@ export const theme = createTheme(baseTheme, {
         root: {
           color: COLORS.white,
           fontSize: 20,
-          height: 60,
+          // height: 60,
           textTransform: 'none',
           '&.Mui-selected': {
             color: COLORS.white,
@@ -282,3 +286,58 @@ export const theme = createTheme(baseTheme, {
     },
   },
 });
+
+export interface CustomThemeOptions extends ThemeOptions {
+  sidebar?: {
+    width?: number;
+    closedWidth?: number;
+  };
+}
+
+const raTheme: Partial<CustomThemeOptions> = {
+  sidebar: {
+    width: 160,
+    // closedWidth: 45,
+  },
+
+  // palette: {
+  //   mode: 'light',
+  // },
+
+  components: {
+    // RaSidebar: {
+    //   styleOverrides: {
+    //     root: {
+    //       backgroundColor: 'Lavender',
+    //       '& .RaDatagrid-headerCell': {
+    //         backgroundColor: 'MistyRose',
+    //       },
+    //     },
+    //   },
+    // },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: COLORS.white,
+          '&.Mui-selected': {
+            color: COLORS.white,
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: COLORS.white,
+        },
+      },
+    },
+  },
+};
+
+export const lightTheme = deepmerge(defaultLightTheme, raTheme);
+
+export const darkTheme = deepmerge(defaultDarkTheme, raTheme);
+
+//radian-t
+//defaul-t

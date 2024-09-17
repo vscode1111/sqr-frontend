@@ -2,7 +2,15 @@ import PersonIcon from '@mui/icons-material/Person';
 import { Box, ListItemIcon, ListItemText, MenuItem, Tab, Tabs } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useCallback } from 'react';
-import { AppBar, Logout, TitlePortal, UserMenu, useUserMenu } from 'react-admin';
+import {
+  AppBar,
+  LoadingIndicator,
+  Logout,
+  TitlePortal,
+  ToggleThemeButton,
+  UserMenu,
+  useUserMenu,
+} from 'react-admin';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { uid } from 'react-uid';
 import { TabValueList } from '~configs';
@@ -29,7 +37,8 @@ export const MainAppBar = observer(() => {
   const navigate = useNavigate();
 
   useInitEffect(() => {
-    ui.setRoute(location.pathname.replace('/', '') as ROUTE);
+    const rootPath = location.pathname.split('/')[1];
+    ui.setRoute(rootPath as ROUTE);
   });
 
   const handleTabChange = useCallback(
@@ -47,6 +56,12 @@ export const MainAppBar = observer(() => {
           <SettingsMenuItem />
           <Logout />
         </UserMenu>
+      }
+      toolbar={
+        <>
+          <ToggleThemeButton />
+          <LoadingIndicator />
+        </>
       }
     >
       <TitlePortal sx={{ width: 150, flex: 'unset' }} />

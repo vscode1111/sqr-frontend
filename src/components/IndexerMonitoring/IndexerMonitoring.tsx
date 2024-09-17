@@ -1,10 +1,11 @@
+import { jsonViewBlackTheme } from './jsonViewBlackTheme';
 import { useIndexerMonitoringStyles } from './useIndexerMonitoringStyles';
 import { Button, Typography } from '@mui/material';
 import JsonView from '@uiw/react-json-view';
 import { observer } from 'mobx-react';
 import { useState } from 'react';
 import { Loader } from '~components';
-import { useInitEffect } from '~hooks';
+import { useInitEffect, useThemeMode } from '~hooks';
 import { ControlStoreProps } from '~types';
 
 interface MonitoringProps extends ControlStoreProps {}
@@ -13,6 +14,8 @@ export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) =>
   const { classes } = useIndexerMonitoringStyles();
 
   const [collapsed, setCollapsed] = useState<number | boolean>(2);
+
+  const { isDarkMode } = useThemeMode();
 
   const {
     fetchStatus,
@@ -50,7 +53,12 @@ export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) =>
             />
           </div>
           {serviceStats && (
-            <JsonView value={serviceStats ?? {}} displayDataTypes={false} collapsed={collapsed} />
+            <JsonView
+              value={serviceStats ?? {}}
+              displayDataTypes={false}
+              collapsed={collapsed}
+              style={isDarkMode && (jsonViewBlackTheme as any)}
+            />
           )}
         </div>
         <div className={classes.rightPanel}>

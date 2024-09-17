@@ -13,6 +13,7 @@ import { GenerateSharesPage, HomePage, LogoutPage, ProfilePage } from '~pages';
 import { ContractCreate, ContractEdit, ContractList, MonitoringPage, SharesPage } from '~ra-pages';
 import { daServer } from '~ra-services';
 import { getBaseUrl } from '~services';
+import { darkTheme, lightTheme } from '~themes';
 import { getMainPath } from '~utils';
 
 const viewMap: Partial<Record<string, ReactNode>> = {
@@ -83,6 +84,10 @@ export const RaContent = observer(() => {
       basename={`/${route}`}
       layout={MainLayout}
       dataProvider={daServer(`${getBaseUrl(route)}/db`)}
+      // theme={defaultLightTheme}
+      // darkTheme={defaultDarkTheme}
+      theme={lightTheme}
+      darkTheme={darkTheme}
     >
       <Resource
         name={SUB_ROUTE.CONTRACTS}
@@ -93,7 +98,7 @@ export const RaContent = observer(() => {
       />
       <CustomRoutes>
         <Route path={`/`} element={viewMap[firstView ?? route]} />
-        <Route path={SUB_ROUTE.SHARES} element={<GenerateSharesPage />} />
+        <Route path={SUB_ROUTE.SHARES} element={<SharesPage />} />
         <Route path={SUB_ROUTE.MONITORING} element={<MonitoringPage />} />
       </CustomRoutes>
     </Admin>

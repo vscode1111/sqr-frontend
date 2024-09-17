@@ -30,6 +30,7 @@ export const useIndexerSharesStyles = makeStyles()((theme) => ({
   statusContainer: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     gap: 20,
   },

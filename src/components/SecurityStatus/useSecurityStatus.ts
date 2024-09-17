@@ -19,7 +19,6 @@ export const useSecurityStatus = makeStyles<{ color: string }>()((theme, { color
     color: theme.colors.white,
     position: 'absolute',
     justifyContent: 'center',
-    left: 'calc(50% - 150px)',
     width: 300,
   },
 }));

@@ -1,6 +1,6 @@
 import { RaApp } from './RaApp';
 import { MainRouter } from './routers';
-import { theme } from './themes';
+import { mainTheme } from './themes';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { configure } from 'mobx';
 
@@ -12,7 +12,7 @@ const IS_RA = true;
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       {IS_RA ? <RaApp /> : <MainRouter />}
     </ThemeProvider>

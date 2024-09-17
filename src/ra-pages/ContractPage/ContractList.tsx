@@ -32,9 +32,10 @@ export const ContractList = observer(() => {
     <List actions={<CompanyListActions />}>
       <Datagrid rowClick='edit'>
         <NumberField label='Id' source={FContractDTO('id')} />
-        <FunctionField
+        <FunctionField<ContractDTO>
           label='Network'
-          render={(contract: ContractDTO) => networksMap.get(contract.networkId)?.name}
+          sortBy={FContractDTO('networkId')}
+          render={(contract) => networksMap.get(contract.networkId)?.name}
         />
         <TextField label='Address' source={FContractDTO('address')} />
         <TextField label='Type' source={FContractDTO('type')} />
