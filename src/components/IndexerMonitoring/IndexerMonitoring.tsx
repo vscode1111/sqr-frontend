@@ -71,6 +71,14 @@ export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) =>
             </Button>
           </div>
           <div className={classes.rightPanelBottom}>
+            <Button variant='contained' onClick={() => controlStore.reboot()}>
+              <Loader
+                size={20}
+                style={{ visibility: softResetActionStatus === 'fetching' ? 'visible' : 'hidden' }}
+              />
+              Reboot
+              <Loader size={20} style={{ visibility: 'hidden' }} />
+            </Button>
             <Button variant='contained' onClick={() => controlStore.softReset()}>
               <Loader
                 size={20}

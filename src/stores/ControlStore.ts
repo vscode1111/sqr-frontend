@@ -21,6 +21,9 @@ export class ControlStore extends StoreBase {
   stopActionStatus: StatusFetching;
   stopActionError: NormalizedError;
 
+  rebootActionStatus: StatusFetching;
+  rebootActionError: NormalizedError;
+
   softResetActionStatus: StatusFetching;
   softResetActionError: NormalizedError;
 
@@ -54,6 +57,7 @@ export class ControlStore extends StoreBase {
     this.fetchStatus = 'init';
     this.sendActionStatus = 'init';
     this.stopActionStatus = 'init';
+    this.rebootActionStatus = 'init';
     this.softResetActionStatus = 'init';
     this.hardResetActionStatus = 'init';
 
@@ -73,6 +77,7 @@ export class ControlStore extends StoreBase {
       sendActionError: observable,
       stopActionStatus: observable,
       stopActionError: observable,
+      rebootActionStatus: observable,
       softResetActionStatus: observable,
       softResetActionError: observable,
       hardResetActionStatus: observable,
@@ -191,6 +196,16 @@ export class ControlStore extends StoreBase {
       },
       'stopActionStatus',
       'stopActionError',
+    );
+  }
+
+  async reboot() {
+    await this.statusHandler(
+      async () => {
+        await this.controlService.reboot();
+      },
+      'softResetActionStatus',
+      'softResetActionError',
     );
   }
 

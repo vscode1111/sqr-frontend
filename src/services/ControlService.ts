@@ -62,6 +62,11 @@ export class ControlService {
     return data;
   }
 
+  async reboot(): Promise<ServiceStats> {
+    const { data } = await axios.delete(`${getBaseUrl(this.route)}/reboot`, getCommonConfig());
+    return data;
+  }
+
   async softReset(): Promise<ServiceStats> {
     const { data } = await axios.delete(
       `${getBaseUrl(this.route)}/indexer/soft-reset`,
