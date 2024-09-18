@@ -10,6 +10,8 @@ const { stringify } = queryString;
 export const dataProvider0 = simpleRestProvider('http://test');
 
 export function daServer(apiUrl: string): DataProvider {
+  console.log(111, apiUrl);
+
   return {
     getList: async (resource, params) => {
       const { page, perPage } = params.pagination || { page: 1, perPage: 10 };

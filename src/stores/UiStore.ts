@@ -1,10 +1,13 @@
 import { makeObservable, observable } from 'mobx';
+import { NF } from '~common';
 import { ROUTE } from '~constants';
+import { ControlStore } from './ControlStore';
 import { RootStore } from './RootStore';
 import { BaseStore } from './StoreBase';
 
 export class UiStore extends BaseStore {
   route: ROUTE;
+  currentControlStore: ControlStore | undefined;
 
   constructor(rootStore: RootStore) {
     super(rootStore);
@@ -17,7 +20,9 @@ export class UiStore extends BaseStore {
     });
   }
 
-  setRoute(token: ROUTE) {
-    this.route = token;
+  setRoute(route: ROUTE) {
+    this.route = route;
   }
 }
+
+export const FUiStore = NF<UiStore>();

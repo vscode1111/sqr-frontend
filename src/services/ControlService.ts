@@ -1,9 +1,17 @@
 import axios from 'axios';
+import { ROUTE } from '~constants';
 import { NetworkRecord, SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
 import { getBaseUrl, getCommonConfig } from './common';
 
 export class ControlService {
-  constructor(private route: string) {}
+  private route: string;
+  constructor() {
+    this.route = '?';
+  }
+
+  setRoute(route: ROUTE) {
+    this.route = route;
+  }
 
   getRoute() {
     return this.route;

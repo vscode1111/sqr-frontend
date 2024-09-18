@@ -1,8 +1,10 @@
-import { action, makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable, observe } from 'mobx';
+import { ROUTE } from '~constants';
 import { ControlService } from '~services';
 import { NetworkRecord, SecurityStatusResponse, ServiceStats, VersionResponse } from '~types';
 import { RootStore } from './RootStore';
 import { BaseStore as StoreBase } from './StoreBase';
+import { FUiStore } from './UiStore';
 import { NormalizedError, StatusFetching } from './types';
 
 export class ControlStore extends StoreBase {
@@ -95,6 +97,15 @@ export class ControlStore extends StoreBase {
     //   this.fetchNetworks();
     // });
 
+    observe(this.rootStore.ui, (change) => {
+      console.log(300, change.type, change.name, 'to', change.object[change.name]);
+      if (change.type === 'update' && change.name === FUiStore('route')) {
+        const value = change.object[change.name] as ROUTE;
+        console.log(301, value);
+        this.controlService.setRoute(value);
+      }
+    });
+
     setInterval(() => {
       if (this.fetchingStatus) {
         this.fetchSecurityStatus();
@@ -106,6 +117,8 @@ export class ControlStore extends StoreBase {
   }
 
   async fetchVersion() {
+    console.log(333, this.rootStore.ui.route);
+
     await this.statusHandler(
       async () => {
         this.serviceVersion = await this.controlService.fetchVersion();

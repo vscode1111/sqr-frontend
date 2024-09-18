@@ -2,7 +2,7 @@ import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { Security } from '@okta/okta-react';
 import { observer } from 'mobx-react';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { Admin, CustomRoutes, Resource } from 'react-admin';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { LoginCallbackEx, MainLayout, RequiredAuth } from '~components';
@@ -77,15 +77,19 @@ export const RaContent = observer(() => {
     ui: { route },
   } = useStores();
 
+  console.log(100, route);
+
   const { firstView } = useTabValue(route);
+
+  console.log(101, route);
+
+  const dataProvider = useMemo(() => daServer(`${getBaseUrl(route)}/db`), []);
 
   return (
     <Admin
       basename={`/${route}`}
       layout={MainLayout}
-      dataProvider={daServer(`${getBaseUrl(route)}/db`)}
-      // theme={defaultLightTheme}
-      // darkTheme={defaultDarkTheme}
+      dataProvider={dataProvider}
       theme={lightTheme}
       darkTheme={darkTheme}
     >

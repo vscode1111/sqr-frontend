@@ -2,12 +2,16 @@ import { useSharesPageStyles } from './useSharesPageStyles';
 import { observer } from 'mobx-react';
 import { Title } from 'react-admin';
 import { IndexerShares } from '~components';
-import { useStores } from '~hooks';
+import { useControlStore } from '~hooks';
 
 export const SharesPage = observer(() => {
   const { classes } = useSharesPageStyles();
 
-  const { launchpadControl: controlStore } = useStores();
+  const controlStore = useControlStore();
+
+  if (!controlStore) {
+    return null;
+  }
 
   return (
     <div className={classes.root}>

@@ -7,16 +7,7 @@ import { LoginCallbackEx, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
 import { useIsLocalhost } from '~hooks';
-import {
-  GenerateSharesPage,
-  HomePage,
-  LaunchpadPage,
-  LockupPage,
-  LogoutPage,
-  ProfilePage,
-  SignaturePage,
-  StakingPage,
-} from '~pages';
+import { GenerateSharesPage, HomePage, LogoutPage, ProfilePage } from '~pages';
 
 const CALLBACK_PATH = '/login/callback';
 
@@ -47,10 +38,10 @@ export function MainRouter() {
           {/* <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} /> */}
           <Route path={`/${ROUTE.TOKEN}/*`} element={<RaApp />} />
           <Route path={`/${ROUTE.CLAIM}/*`} element={<RaApp />} />
-          <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
+          {/* <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
           <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
           <Route path={`/${ROUTE.SIGNATURE}`} element={<SignaturePage />} />
-          <Route path={`/${ROUTE.LAUNCHPAD}`} element={<LaunchpadPage />} />
+          <Route path={`/${ROUTE.LAUNCHPAD}`} element={<LaunchpadPage />} /> */}
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
