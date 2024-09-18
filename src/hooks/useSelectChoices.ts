@@ -7,12 +7,12 @@ export function useSelectChoices() {
   const { control } = useStores();
 
   useInitEffect(() => {
-    if (!control.serviceContractTypes) {
-      control.fetchContractTypes();
-    }
-
     if (!control.serviceNetworks) {
       control.fetchNetworks();
+    }
+
+    if (!control.serviceContractTypes) {
+      control.fetchContractTypes();
     }
   });
 

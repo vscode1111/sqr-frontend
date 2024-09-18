@@ -117,6 +117,8 @@ export class ControlStore extends StoreBase {
 
   setRoute(route: ROUTE) {
     this.controlService.setRoute(route);
+    this.serviceNetworks = null;
+    this.serviceContractTypes = null;
   }
 
   async fetchVersion() {
