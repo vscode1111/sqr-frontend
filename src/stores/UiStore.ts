@@ -20,8 +20,13 @@ export class UiStore extends BaseStore {
     });
   }
 
-  setRoute(route: ROUTE) {
+  async setRoute(route: ROUTE) {
     this.route = route;
+    const control = this.rootStore.control;
+    control.setRoute(route);
+
+    control.fetchVersion();
+    control.fetchStats();
   }
 }
 
