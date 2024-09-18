@@ -48,7 +48,7 @@ export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) =>
               size={20}
               style={{
                 visibility: fetchStatus === 'fetching' ? 'visible' : 'hidden',
-                color: 'black',
+                color: isDarkMode ? 'white' : 'black',
               }}
             />
           </div>

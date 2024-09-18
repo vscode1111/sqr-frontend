@@ -11,11 +11,11 @@ import {
   UserMenu,
   useUserMenu,
 } from 'react-admin';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { uid } from 'react-uid';
 import { TabValueList } from '~configs';
 import { ROUTE } from '~constants';
-import { useInitEffect, useStores } from '~hooks';
+import { useInitEffect, usePathnames, useStores } from '~hooks';
 
 const SettingsMenuItem = () => {
   const userMenu = useUserMenu();
@@ -33,12 +33,11 @@ const SettingsMenuItem = () => {
 export const MainAppBar = observer(() => {
   const { ui } = useStores();
 
-  const location = useLocation();
   const navigate = useNavigate();
+  const { firstPathname } = usePathnames();
 
   useInitEffect(() => {
-    const rootPath = location.pathname.split('/')[1];
-    ui.setRoute(rootPath as ROUTE);
+    ui.setRoute(firstPathname as ROUTE);
   });
 
   const handleTabChange = useCallback(

@@ -1,8 +1,9 @@
-import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 import { defaultDarkTheme, defaultLightTheme } from 'react-admin';
 import { COLORS, TRANSITION } from '~constants';
 import { globalStyles } from './globalStyles';
+import { CustomThemeOptions } from './types';
 
 //ToDo: clean
 
@@ -287,14 +288,10 @@ export const mainTheme = createTheme(baseTheme, {
   },
 });
 
-export interface CustomThemeOptions extends ThemeOptions {
-  sidebar?: {
-    width?: number;
-    closedWidth?: number;
-  };
-}
+const theme = createTheme();
 
 const raTheme: Partial<CustomThemeOptions> = {
+  colors: COLORS,
   sidebar: {
     width: 160,
     // closedWidth: 45,
@@ -305,16 +302,51 @@ const raTheme: Partial<CustomThemeOptions> = {
   // },
 
   components: {
-    // RaSidebar: {
-    //   styleOverrides: {
-    //     root: {
-    //       backgroundColor: 'Lavender',
-    //       '& .RaDatagrid-headerCell': {
-    //         backgroundColor: 'MistyRose',
-    //       },
-    //     },
-    //   },
-    // },
+    MuiTypography: {
+      styleOverrides: {
+        h1: {
+          fontWeight: 500,
+          fontSize: 70,
+          lineHeight: '84px',
+        },
+        h2: {
+          fontWeight: 500,
+          fontSize: 50,
+          lineHeight: '60px',
+        },
+        h3: {
+          fontWeight: 500,
+          fontSize: 34,
+          lineHeight: '48px',
+        },
+        h4: {
+          fontWeight: 500,
+          fontSize: 22,
+          lineHeight: '40px',
+        },
+        h5: {
+          fontWeight: 500,
+          fontSize: 18,
+          lineHeight: '18px',
+        },
+        h6: {
+          fontWeight: 500,
+          fontSize: 16,
+          lineHeight: '19.2px',
+        },
+        subtitle1: {
+          fontWeight: 500,
+          fontSize: 14,
+          lineHeight: '16.8px',
+        },
+        body1: {
+          fontWeight: 300,
+          fontSize: 16,
+          lineHeight: '28.8px',
+        },
+      },
+    },
+
     MuiTab: {
       styleOverrides: {
         root: {
@@ -329,6 +361,30 @@ const raTheme: Partial<CustomThemeOptions> = {
       styleOverrides: {
         indicator: {
           backgroundColor: COLORS.white,
+        },
+      },
+    },
+    RaMenuItemLink: {
+      styleOverrides: {
+        root: {
+          border: `2px solid transparent`,
+          borderLeft: `0px solid transparent`,
+          // borderLeft: `3px solid ${theme.palette.primary.contrastText}`,
+          '&:hover': {
+            borderRadius: '0px 100px 100px 0px',
+          },
+          '&.RaMenuItemLink-active': {
+            borderRadius: '0px 100px 100px 0px',
+            // backgroundImage: `linear-gradient(98deg, ${theme.palette.primary.light}, ${theme.palette.primary.dark} 94%)`,
+            border: `2px solid ${theme.palette.primary.main}`,
+            borderLeft: `0px solid ${theme.palette.primary.main}`,
+            // boxShadow: theme.shadows[1],
+            // color: theme.palette.primary.contrastText,
+
+            // '& .MuiSvgIcon-root': {
+            //   fill: theme.palette.primary.contrastText,
+            // },
+          },
         },
       },
     },

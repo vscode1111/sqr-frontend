@@ -13,7 +13,7 @@ export const MonitoringPage = observer(() => {
 
   return (
     <Box>
-      <Title title='Shares' />
+      <Title title='Monitoring' />
       <IndexerMonitoring controlStore={controlStore} />
     </Box>
   );

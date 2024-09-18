@@ -2,13 +2,13 @@ import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { Security } from '@okta/okta-react';
 import { observer } from 'mobx-react';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { Admin, CustomRoutes, Resource } from 'react-admin';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { LoginCallbackEx, MainLayout, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE, SUB_ROUTE } from '~constants';
-import { useIsLocalhost, useStores, useTabValue } from '~hooks';
+import { useIsLocalhost, usePathnames, useStores, useTabValue } from '~hooks';
 import { GenerateSharesPage, HomePage, LogoutPage, ProfilePage } from '~pages';
 import { ContractCreate, ContractEdit, ContractList, MonitoringPage, SharesPage } from '~ra-pages';
 import { daServer } from '~ra-services';
@@ -65,7 +65,7 @@ export const RaApp = observer(() => {
         </Route>
         <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
         <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
-        {/* <Route path={`/${ROUTE.SHARES}`} element={<SharesPage />} /> */}
+        {/* <Route path={`/${ROUTE.GENERATE_SHARES}`} element={<GenerateSharesPage />} /> */}
         <Route path={`/${ROUTE.LOGOUT}`} element={<LogoutPage />} />
       </Routes>
     </Security>
@@ -77,11 +77,20 @@ export const RaContent = observer(() => {
     ui: { route },
   } = useStores();
 
+  const navigate = useNavigate();
+
   console.log(100, route);
 
   const { firstView } = useTabValue(route);
+  const { secondPathname } = usePathnames();
 
-  console.log(101, route);
+  console.log(101, route, firstView, secondPathname);
+
+  useEffect(() => {
+    if (firstView && !secondPathname) {
+      navigate(`${firstView}`);
+    }
+  }, [firstView, secondPathname, navigate]);
 
   const dataProvider = useMemo(() => daServer(`${getBaseUrl(route)}/db`), [route]);
 

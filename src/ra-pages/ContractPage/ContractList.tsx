@@ -39,7 +39,7 @@ export const ContractList = observer(() => {
         />
         <TextField label='Address' source={FContractDTO('address')} />
         <TextField label='Type' source={FContractDTO('type')} />
-        <TextField label='name' source={FContractDTO('name')} />
+        <TextField label='Name' source={FContractDTO('name')} />
         <TextField label='Sync block number' source={FContractDTO('syncBlockNumber')} />
         <TextField label='Process block number' source={FContractDTO('processBlockNumber')} />
         <BooleanField label='Disable' source={FContractDTO('disable')} />

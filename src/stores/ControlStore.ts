@@ -6,6 +6,17 @@ import { RootStore } from './RootStore';
 import { BaseStore as StoreBase } from './StoreBase';
 import { NormalizedError, StatusFetching } from './types';
 
+const DEFAULT_VERSION_RESPONSE: VersionResponse = {
+  name: '-',
+  version: '-',
+};
+
+const DEFAULT_SECURITY_STATUS_RESPONSE: SecurityStatusResponse = {
+  status: 'waiting',
+  sharesCount: 0,
+  sharesThreshold: 0,
+};
+
 export class ControlStore extends StoreBase {
   serviceVersion: VersionResponse;
   securityStatus: SecurityStatusResponse;
@@ -40,16 +51,8 @@ export class ControlStore extends StoreBase {
   ) {
     super(rootStore);
 
-    this.serviceVersion = {
-      name: '-',
-      version: '-',
-    };
-
-    this.securityStatus = {
-      status: 'waiting',
-      sharesCount: 0,
-      sharesThreshold: 0,
-    };
+    this.serviceVersion = DEFAULT_VERSION_RESPONSE;
+    this.securityStatus = DEFAULT_SECURITY_STATUS_RESPONSE;
 
     this.serviceStats = null;
     this.serviceContractTypes = null;
@@ -91,16 +94,9 @@ export class ControlStore extends StoreBase {
       hardReset: action,
     });
 
-    // setTimeout(() => {
-    //   console.log(111, this.controlService.getRouter());
-    //   this.fetchNetworks();
-    // });
-
     // observe(this.rootStore.ui, (change) => {
-    //   console.log(300, change.type, change.name, 'to', change.object[change.name]);
     //   if (change.type === 'update' && change.name === FUiStore('route')) {
     //     const value = change.object[change.name] as ROUTE;
-    //     console.log(301, value);
     //     this.controlService.setRoute(value);
     //   }
     // });
@@ -117,6 +113,8 @@ export class ControlStore extends StoreBase {
 
   setRoute(route: ROUTE) {
     this.controlService.setRoute(route);
+
+    this.serviceVersion = DEFAULT_VERSION_RESPONSE;
     this.serviceStats = null;
     this.serviceNetworks = null;
     this.serviceContractTypes = null;
