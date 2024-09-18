@@ -6,7 +6,7 @@ import { getBaseUrl, getCommonConfig } from './common';
 export class ControlService {
   private route: string;
   constructor() {
-    this.route = '?';
+    this.route = '-';
   }
 
   setRoute(route: ROUTE) {

@@ -41,8 +41,8 @@ export class ControlStore extends StoreBase {
     super(rootStore);
 
     this.serviceVersion = {
-      name: '',
-      version: '',
+      name: '-',
+      version: '-',
     };
 
     this.securityStatus = {
@@ -117,6 +117,7 @@ export class ControlStore extends StoreBase {
 
   setRoute(route: ROUTE) {
     this.controlService.setRoute(route);
+    this.serviceStats = null;
     this.serviceNetworks = null;
     this.serviceContractTypes = null;
   }
