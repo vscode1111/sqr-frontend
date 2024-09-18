@@ -83,7 +83,7 @@ export const RaContent = observer(() => {
 
   console.log(101, route);
 
-  const dataProvider = useMemo(() => daServer(`${getBaseUrl(route)}/db`), []);
+  const dataProvider = useMemo(() => daServer(`${getBaseUrl(route)}/db`), [route]);
 
   return (
     <Admin
