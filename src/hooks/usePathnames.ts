@@ -14,7 +14,7 @@ export function usePathnames() {
       firstPathname,
       secondPathname,
     };
-  }, [location.pathname]);
+  }, [location]);
 
   return result;
 }

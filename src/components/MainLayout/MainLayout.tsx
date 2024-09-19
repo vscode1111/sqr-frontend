@@ -5,7 +5,7 @@ import { CheckForApplicationUpdate, Layout as RALayout } from 'react-admin';
 
 export function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <RALayout appBar={MainAppBar} menu={PageMenu}>
+    <RALayout menu={PageMenu} appBar={MainAppBar}>
       {children}
       <CheckForApplicationUpdate />
     </RALayout>

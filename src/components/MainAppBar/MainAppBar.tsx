@@ -1,44 +1,52 @@
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box, ListItemIcon, ListItemText, MenuItem, Tab, Tabs } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useCallback } from 'react';
-import {
-  AppBar,
-  LoadingIndicator,
-  Logout,
-  TitlePortal,
-  ToggleThemeButton,
-  UserMenu,
-  useUserMenu,
-} from 'react-admin';
+import { AppBar, LoadingIndicator, TitlePortal, ToggleThemeButton, UserMenu } from 'react-admin';
 import { useNavigate } from 'react-router-dom';
 import { uid } from 'react-uid';
 import { TabValueList } from '~configs';
 import { ROUTE } from '~constants';
-import { useInitEffect, usePathnames, useStores } from '~hooks';
+import { useStores, useUi } from '~hooks';
 
-const SettingsMenuItem = () => {
-  const userMenu = useUserMenu();
+const AccountMenuItem = observer(() => {
+  const { navigateToRoute } = useUi();
+
+  const handleClick = useCallback(() => {
+    navigateToRoute(ROUTE.PROFILE);
+  }, [navigateToRoute]);
 
   return (
-    <MenuItem onClick={userMenu?.onClose}>
+    <MenuItem onClick={handleClick}>
       <ListItemIcon>
         <PersonIcon fontSize='small' />
       </ListItemIcon>
       <ListItemText>Account</ListItemText>
     </MenuItem>
   );
-};
+});
+
+const LogoutMenuItem = observer(() => {
+  const { navigateToRoute } = useUi();
+
+  const handleClick = useCallback(() => {
+    navigateToRoute(ROUTE.LOGOUT);
+  }, [navigateToRoute]);
+
+  return (
+    <MenuItem onClick={handleClick}>
+      <ListItemIcon>
+        <ExitToAppIcon fontSize='small' />
+      </ListItemIcon>
+      <ListItemText>Logout</ListItemText>
+    </MenuItem>
+  );
+});
 
 export const MainAppBar = observer(() => {
   const { ui } = useStores();
-
   const navigate = useNavigate();
-  const { firstPathname } = usePathnames();
-
-  useInitEffect(() => {
-    ui.setRoute(firstPathname as ROUTE);
-  });
 
   const handleTabChange = useCallback(
     (_event: React.SyntheticEvent, newValue: string) => {
@@ -52,8 +60,8 @@ export const MainAppBar = observer(() => {
     <AppBar
       userMenu={
         <UserMenu>
-          <SettingsMenuItem />
-          <Logout />
+          <AccountMenuItem />
+          <LogoutMenuItem />
         </UserMenu>
       }
       toolbar={

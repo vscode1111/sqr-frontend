@@ -3,7 +3,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Loading } from '~components';
+import { LoadingOkta } from '~components';
 import { useIsLocalhost, useStores } from '~hooks';
 
 export const RequiredAuth = observer(() => {
@@ -40,7 +40,7 @@ export const RequiredAuth = observer(() => {
   }
 
   if (!authState || !authState?.isAuthenticated) {
-    return <Loading />;
+    return <LoadingOkta />;
   }
 
   return <Outlet />;

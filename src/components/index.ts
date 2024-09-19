@@ -2,7 +2,7 @@ export * from './CopyText';
 export * from './IndexerMonitoring';
 export * from './IndexerShares';
 export * from './Loader';
-export * from './Loading';
+export * from './LoadingOkta';
 export * from './LoginCallbackEx';
 export * from './MainLayout';
 export * from './PageLayout';

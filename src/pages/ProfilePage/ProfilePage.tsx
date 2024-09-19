@@ -1,8 +1,7 @@
 import { useProfilePageStyles } from './useProfilePageStyles';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { PageLayout } from '~components';
+import { useEffect, useMemo, useState } from 'react';
 
 export function ProfilePage() {
   const { classes } = useProfilePageStyles();
@@ -20,21 +19,6 @@ export function ProfilePage() {
       });
     }
   }, [authState, oktaAuth]); // Update if authState changes
-
-  const callBackend = useCallback(async () => {
-    const response = await fetch('http://localhost:3000/version', {
-      headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      return Promise.reject();
-    }
-    const data = await response.json();
-    console.log(111, data);
-    // setMessages(data.messages);
-  }, [authState?.accessToken?.accessToken]);
 
   const content = useMemo(() => {
     if (!userInfo) {
@@ -54,17 +38,7 @@ export function ProfilePage() {
           </a>{' '}
           and is now stored in local storage.
         </p>
-        <p>
-          This route is protected with the <code>&lt;SecureRoute&gt;</code> component, which will
-          ensure that this page cannot be accessed until you have authenticated.
-        </p>
         <table>
-          <thead>
-            <tr>
-              <th>Claim</th>
-              <th>Value</th>
-            </tr>
-          </thead>
           <tbody>
             {Object.entries(userInfo).map((claimEntry) => {
               const claimName = claimEntry[0];
@@ -79,10 +53,9 @@ export function ProfilePage() {
             })}
           </tbody>
         </table>
-        <button onClick={callBackend}>Call api</button>
       </div>
     );
-  }, [userInfo, classes.root, callBackend]);
+  }, [userInfo, classes.root]);
 
-  return <PageLayout>{content}</PageLayout>;
+  return content;
 }

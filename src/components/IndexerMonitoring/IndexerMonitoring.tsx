@@ -27,7 +27,6 @@ export const IndexerMonitoring = observer(({ controlStore }: MonitoringProps) =>
 
   useInitEffect(() => {
     controlStore.fetchingStats = true;
-
     controlStore.fetchVersion();
 
     return () => {

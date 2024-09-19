@@ -3,7 +3,7 @@ import { Security } from '@okta/okta-react';
 import { useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { RaApp } from '~RaApp';
-import { LoginCallbackEx, RequiredAuth } from '~components';
+import { LoginCallbackEx, PageLayout, RequiredAuth } from '~components';
 import { oktaConfig } from '~configs';
 import { ROUTE } from '~constants';
 import { useIsLocalhost } from '~hooks';
@@ -37,7 +37,7 @@ export function MainRouter() {
           {/* <Route path={`/${ROUTE.TOKEN}`} element={<TokenPage />} /> */}
           {/* <Route path={`/${ROUTE.CLAIM}`} element={<ClaimPage />} /> */}
           <Route path={`/${ROUTE.TOKEN}/*`} element={<RaApp />} />
-          <Route path={`/${ROUTE.CLAIM}/*`} element={<RaApp />} />
+          <Route path={`/${ROUTE.CLAIM}/*`} element={<PageLayout>Claim</PageLayout>} />
           {/* <Route path={`/${ROUTE.LOCKUP}`} element={<LockupPage />} />
           <Route path={`/${ROUTE.STAKING}`} element={<StakingPage />} />
           <Route path={`/${ROUTE.SIGNATURE}`} element={<SignaturePage />} />

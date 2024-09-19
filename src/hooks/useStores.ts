@@ -3,6 +3,6 @@ import { stores } from '~stores';
 
 export const StoreContext = createContext(stores);
 
-export const useStores = () => {
+export function useStores() {
   return useContext<typeof stores>(StoreContext);
-};
+}

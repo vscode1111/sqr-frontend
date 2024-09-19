@@ -18,6 +18,8 @@ import { getMainPath } from '~utils';
 
 const viewMap: Partial<Record<string, ReactNode>> = {
   [ROUTE.GENERATE_SHARES]: <GenerateSharesPage />,
+  [ROUTE.PROFILE]: <ProfilePage />,
+  [ROUTE.LOGOUT]: <LogoutPage />,
   [SUB_ROUTE.SHARES]: <SharesPage />,
   [SUB_ROUTE.MONITORING]: <MonitoringPage />,
   [SUB_ROUTE.CONTRACTS]: (
@@ -36,8 +38,15 @@ const oktaAuth = new OktaAuth(oktaConfig);
 const CALLBACK_PATH = '/login/callback';
 
 export const RaApp = observer(() => {
+  const { ui } = useStores();
   const isLocalhost = useIsLocalhost();
   const navigate = useNavigate();
+
+  const { firstPathname } = usePathnames();
+
+  useEffect(() => {
+    ui.setRoute(firstPathname as ROUTE);
+  }, [firstPathname, ui]);
 
   const restoreOriginalUri = useCallback(
     (_oktaAuth: OktaAuth, originalUri: string) => {
@@ -62,17 +71,16 @@ export const RaApp = observer(() => {
           <Route path={getMainPath(ROUTE.SIGNATURE)} element={<RaContent />} />
           <Route path={getMainPath(ROUTE.LAUNCHPAD)} element={<RaContent />} />
           <Route path={getMainPath(ROUTE.GENERATE_SHARES)} element={<RaContent />} />
+          <Route path={getMainPath(ROUTE.PROFILE)} element={<RaContent />} />
+          <Route path={getMainPath(ROUTE.LOGOUT)} element={<RaContent />} />
         </Route>
-        <Route path={CALLBACK_PATH} element={<LoginCallbackEx />} />
-        <Route path={`/${ROUTE.PROFILE}`} element={<ProfilePage />} />
-        {/* <Route path={`/${ROUTE.GENERATE_SHARES}`} element={<GenerateSharesPage />} /> */}
-        <Route path={`/${ROUTE.LOGOUT}`} element={<LogoutPage />} />
+        <Route path={CALLBACK_PATH} element={<RaContent isCallbackPath />} />
       </Routes>
     </Security>
   );
 });
 
-export const RaContent = observer(() => {
+export const RaContent = observer(({ isCallbackPath = false }: { isCallbackPath?: boolean }) => {
   const {
     ui: { route },
   } = useStores();
@@ -82,12 +90,13 @@ export const RaContent = observer(() => {
   console.log(100, route);
 
   const { firstView } = useTabValue(route);
-  const { secondPathname } = usePathnames();
+  const { firstPathname, secondPathname } = usePathnames();
 
-  console.log(101, route, firstView, secondPathname);
+  console.log(101, route, firstView, firstPathname, secondPathname);
 
   useEffect(() => {
     if (firstView && !secondPathname) {
+      console.log(444, 'navigate', firstView);
       navigate(`${firstView}`);
     }
   }, [firstView, secondPathname, navigate]);
@@ -110,7 +119,10 @@ export const RaContent = observer(() => {
         create={ContractCreate}
       />
       <CustomRoutes>
-        <Route path={`/`} element={viewMap[firstView ?? route]} />
+        <Route
+          path={`/`}
+          element={isCallbackPath ? <LoginCallbackEx /> : viewMap[firstView ?? route]}
+        />
         <Route path={SUB_ROUTE.SHARES} element={<SharesPage />} />
         <Route path={SUB_ROUTE.MONITORING} element={<MonitoringPage />} />
       </CustomRoutes>

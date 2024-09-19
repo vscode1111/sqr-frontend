@@ -1,10 +1,6 @@
 import { LoginCallback } from '@okta/okta-react';
-import { Loading, PageLayout } from '~components';
+import { LoadingOkta } from '~components';
 
 export function LoginCallbackEx() {
-  return (
-    <PageLayout>
-      <LoginCallback loadingElement={<Loading />} />
-    </PageLayout>
-  );
+  return <LoginCallback loadingElement={<LoadingOkta />} />;
 }
