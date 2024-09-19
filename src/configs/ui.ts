@@ -7,6 +7,7 @@ export const TabValueList: TabValue[] = [
     value: ROUTE.TOKEN,
     subMenus: {
       monitoring: true,
+      contracts: true,
     },
   },
   {
@@ -15,6 +16,7 @@ export const TabValueList: TabValue[] = [
     subMenus: {
       shares: true,
       monitoring: true,
+      contracts: true,
     },
   },
   {

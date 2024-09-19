@@ -87,16 +87,11 @@ export const RaContent = observer(({ isCallbackPath = false }: { isCallbackPath?
 
   const navigate = useNavigate();
 
-  console.log(100, route);
-
   const { firstView } = useTabValue(route);
-  const { firstPathname, secondPathname } = usePathnames();
-
-  console.log(101, route, firstView, firstPathname, secondPathname);
+  const { secondPathname } = usePathnames();
 
   useEffect(() => {
     if (firstView && !secondPathname) {
-      console.log(444, 'navigate', firstView);
       navigate(`${firstView}`);
     }
   }, [firstView, secondPathname, navigate]);

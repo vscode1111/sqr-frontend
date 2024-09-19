@@ -336,8 +336,8 @@ const raTheme: Partial<CustomThemeOptions> = {
         },
         subtitle1: {
           fontWeight: 500,
-          fontSize: 14,
-          lineHeight: '16.8px',
+          fontSize: 16,
+          // lineHeight: '16.8px',
         },
         body1: {
           fontWeight: 300,

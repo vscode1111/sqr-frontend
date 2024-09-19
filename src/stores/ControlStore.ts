@@ -121,8 +121,6 @@ export class ControlStore extends StoreBase {
   }
 
   async fetchVersion() {
-    console.log(333, this.rootStore.ui.route);
-
     await this.statusHandler(
       async () => {
         this.serviceVersion = await this.controlService.fetchVersion();
