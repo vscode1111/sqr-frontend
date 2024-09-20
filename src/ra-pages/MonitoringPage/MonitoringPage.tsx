@@ -1,7 +1,6 @@
-import { Box } from '@mui/material';
 import { observer } from 'mobx-react';
 import { Title } from 'react-admin';
-import { IndexerMonitoring } from '~components';
+import { IndexerMonitoring, PageLayout } from '~components';
 import { useControlStore } from '~hooks';
 
 export const MonitoringPage = observer(() => {
@@ -12,9 +11,9 @@ export const MonitoringPage = observer(() => {
   }
 
   return (
-    <Box>
+    <PageLayout>
       <Title title='Monitoring' />
       <IndexerMonitoring controlStore={controlStore} />
-    </Box>
+    </PageLayout>
   );
 });

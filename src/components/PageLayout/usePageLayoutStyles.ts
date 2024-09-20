@@ -1,25 +1,17 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const usePageLayoutStyles = makeStyles()(() => ({
+export const usePageLayoutStyles = makeStyles<{ short?: boolean }>()((_, props) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  appBar: {
-    // marginBottom: 20,
-  },
-  toolbar: {
-    display: 'flex',
-    gap: 10,
-  },
   children: {
     display: 'flex',
     flexDirection: 'column',
-    paddingLeft: 50,
-    paddingRight: 50,
+    padding: 30,
     width: '100%',
-    maxWidth: 800,
-    height: 'calc(100vh - 100px)',
+    maxWidth: props.short ? 900 : 'unset',
+    height: props.short ? 'calc(100vh - 100px)' : 'unset',
   },
 }));

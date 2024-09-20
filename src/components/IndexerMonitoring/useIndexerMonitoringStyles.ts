@@ -9,7 +9,6 @@ export const useIndexerMonitoringStyles = makeStyles()((theme) => ({
   mainContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: 30,
     width: '100%',
     gap: 30,
   },
