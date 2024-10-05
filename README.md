@@ -1,1 +1,1 @@
-Front-end for SQR service
+Frontend for indexer service

@@ -1,2 +1,2 @@
-docker build -t sqr-frontend .
-docker run -d --name sqr-frontend-01 -p 5173:80 sqr-frontend
+docker build -t web3-indexer-frontend .
+docker run -d --name web3-indexer-frontend-01 -p 5173:80 web3-indexer-frontend
